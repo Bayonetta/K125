@@ -2,35 +2,22 @@
 <html lang="en">
 
 <head>
+    <title>ZHAO SHUAI HP</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人介绍页</title>
+    <link rel="icon" , href="../src/avatar.jpg" , sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+        * {
             margin: 0;
             padding: 0;
         }
         
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 65px auto;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        h1 {
-            color: #333;
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-        
-        p {
-            color: #666;
-            font-size: 18px;
-            line-height: 1.5;
         }
         
         .skills {
@@ -88,16 +75,34 @@
 </head>
 
 <body>
+    <nav>
+        <ul>
+            <li><img src="../src/avatar.jpg" alt="Logo"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="introduction.html">About</a></li>
+        </ul>
+    </nav>
     <div class="container">
-        <h1>Personal Instruction</h1>
-        <p>Hello, I am ZHAO SHUAI. I am a web developer. I love coding and creating new things. I am passionate about learning new technologies and frameworks. I am a quick learner and a team player. I am always ready to take on new challenges and solve
-            problems.
-        </p>
+        <h1> Welcome to my home page.</h1>
 
-        <div class="intrests">
-            <h2>Intrests</h2>
-            <ul class="intrest">
-                <li id="i1">Skying</li>
+        <div id="intro_and_img">
+            <div id="instruction">
+                <p>I'm ZHAO Shuai. </p>
+                <p>I came from Tianjin.</p>
+            </div>
+            <img src="../src/me.jpg" alt="Me" id="me_img">
+        </div>
+        <div class="skills">
+            <h2>Interests</h2>
+            <ul class="list">
+                <li id="i1">Snowboard</li>
                 <li id="i2">Playing video games(RPG, FPS, etc.) </li>
                 <li id="i3">Watching pets' videos </li>
                 <li id="i4">Reading supernatural fiction </li>
@@ -106,7 +111,7 @@
 
         <div class="skills">
             <h2>Skills</h2>
-            <ul>
+            <ul class="list">
                 <li><span>Programming Languages: </span>HTML, CSS, JavaScript</li>
                 <li><span>前端框架：</span>React, Vue.js</li>
                 <li><span>后端技术：</span>Node.js, Express</li>
@@ -116,14 +121,16 @@
 
         <div class="contact">
             <h2>Contact</h2>
-            <ul>
+            <ul class="list">
                 <li><span>Email：</span>zhaoshuai@jaist.ac.jp</li>
                 <li><span>Phone：</span>123-456-7890</li>
                 <li><span>Address：</span>JAIST Student Housing</li>
             </ul>
         </div>
     </div>
-
+    <footer>
+        <p>© 2024 ZHAO SHUAI. All rights reserved.</p>
+    </footer>
 </body>
 
 </html>
