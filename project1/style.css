@@ -132,6 +132,7 @@ nav {
     display: flex;
     justify-content: center;
     z-index: 1000;
+    padding: 0 20px;
 }
 
 nav ul {
@@ -176,9 +177,8 @@ nav ul li a:hover {
 }
 
 .gallery {
-    margin-top: 65px;
-    margin-left: 15px;
-    margin-right: 15px;
+    width: 800px;
+    margin: 65px auto;
     column-count: 3;
     column-gap: 15px;
     column-fill: balance;
@@ -241,7 +241,7 @@ footer {
     width: 100%;
     text-align: center;
     padding: 10px;
-    margin-top: 15px;
+    margin-top: 65px;
     font-size: 12px;
     color: #494A5F;
 }
