@@ -2,50 +2,64 @@
 <html>
 
 <head>
+    <title>ZHAO SHUAI HP</title>
+    <meta charset="utf-8">
+    <link rel="icon" , href="../src/avatar.jpg" , sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-        }
-        
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: #ccc;
-        }
-        
-        .text {
-            margin: 10px 0;
-        }
-        
-        .social-icons {
-            display: flex;
-            justify-content: center;
-        }
-        
-        .social-icons img {
-            width: 30px;
-            height: 30px;
-            margin: 0 5px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-image: url('../src/background.jpg');
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
 
 <body>
-    <div class="avatar"></div>
-    <div class="text">First line of text</div>
-    <div class="text">Second line of text</div>
-    <div class="social-icons">
-        <img src="social-media-icon-1.png" alt="Social Media Icon 1">
-        <img src="social-media-icon-2.png" alt="Social Media Icon 2">
-        <img src="social-media-icon-3.png" alt="Social Media Icon 3">
-        <!-- Add more social media icons here -->
-    </div>
+    <main>
+        <div id="content">
+            <div>
+                <img src="../src/avatar.jpg" alt="Avatar" id="avatar">
+            </div>
+            <div id="name">
+                <p>ZHAO SHUAI</p>
+            </div>
+            <div id="quote">
+                <p>澹泊にあらざれば、以て志を明らかにするなく。寧静にあらざれば、以て遠きを致すなし。</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——　諸葛孔明</p>
+            </div>
+            <div id="buttons">
+                <div class="button">
+                    <a href="https://github.com/Bayonetta" rel="noopener">
+                        <img id="github_img" class="button_img" src="../src/github.png" alt="Github Icon">
+                        <p class="button_text">Github</p>
+                    </a>
+                </div>
+                <div class="button">
+                    <a href="http://bayonetta.github.io" rel="noopener">
+                        <img id="blog_img" class="button_img" src="../src/blog.png" alt="Blog Icon">
+                        <p class="button_text">Blog</p>
+                    </a>
+                </div>
+                <div class="button">
+                    <a href="gallery.html" rel="noopener">
+                        <img id="gallery_img" class="button_img" src="../src/gallery.png" alt="Gallery Icon">
+                        <p class="button_text">Gallery</p>
+                    </a>
+                </div>
+                <div class="button">
+                    <a href="introduction.html" rel="noopener">
+                        <img id="about_img" class="button_img" src="../src/about.png" alt="About Icon">
+                        <p class="button_text">About</p>
+                    </a>
+                </div>
+            </div>
+            <div id="footer">© 2024 ZHAO SHUAI. All rights reserved.</div>
+        </div>
+    </main>
 </body>
 
 </html>
