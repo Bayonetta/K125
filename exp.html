@@ -1,0 +1,3602 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <title>Discover Your D&D Alignment Type</title>
+    <meta charset="UTF-8">
+    <style>
+        @charset "UTF-8";
+        html {
+            min-height: 101vh
+        }
+        
+        body,
+        html {
+            margin: 0;
+            cursor: default;
+            font-size: 1em;
+            font-family: "Helvetica Neue", Helvetica, "Lucida Grande", "Lucida Sans Unicode", Arial, Verdana, sans-serif
+        }
+        
+        @media only screen and (max-width:720px) {
+            body,
+            html {
+                height: 100%;
+                margin: 0;
+                cursor: default;
+                font-size: 1em;
+                -webkit-text-size-adjust: none
+            }
+        }
+        
+        @media only screen and (min-width:970px) {
+            body body,
+            html body {
+                font-size: 1.2em
+            }
+            body .hint,
+            html .hint {
+                max-width: 999px
+            }
+            body #start0,
+            html #start0 {
+                height: 82px
+            }
+        }
+        
+        .answer,
+        a,
+        button {
+            user-select: none
+        }
+        
+        input {
+            font-size: 1em
+        }
+        
+        input[type=button],
+        input[type=submit] {
+            -webkit-appearance: button;
+            cursor: pointer
+        }
+        
+        a,
+        button {
+            cursor: pointer
+        }
+        
+        h1 {
+            line-height: 1em;
+            font-size: 1.25em;
+            padding: .25em 0;
+            margin: 0;
+            text-align: center;
+            line-height: 1em;
+            font-size: 1.25em;
+            padding: .38em;
+            margin: 0;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+            background: #188038;
+            color: #efe
+        }
+        
+        @media only screen and (max-width:720px) {
+            h1 {
+                font-size: 1.25em;
+                font-weight: 700
+            }
+        }
+        
+        .hint {
+            width: 98%;
+            font-size: 1em;
+            background: #f3f3f3;
+            border-radius: 5px;
+            color: #444;
+            margin: 7px auto 9px;
+            padding: 0 0 4px 0;
+            text-align: left
+        }
+        
+        h2 {
+            text-align: center
+        }
+        
+        h1+h2 {
+            font-size: .8em
+        }
+        
+        #splash {
+            text-align: center;
+            margin: 0 auto
+        }
+        
+        #splash p {
+            padding: 0 1em
+        }
+        
+        .pure-button {
+            font-family: inherit;
+            font-size: 100%;
+            padding: .5em 1em;
+            color: #444;
+            color: rgba(0, 0, 0, .8);
+            border: 1px solid #999;
+            border: 0 transparent;
+            background-color: #e6e6e6;
+            text-decoration: none;
+            border-radius: 2px
+        }
+        
+        .pure-button::-moz-focus-inner {
+            padding: 0;
+            border: 0
+        }
+        
+        .pure-button-hover,
+        .pure-button:focus,
+        .pure-button:hover {
+            background-image: linear-gradient(transparent, rgba(0, 0, 0, .05) 40%, rgba(0, 0, 0, .1))
+        }
+        
+        .pure-button:focus {
+            outline: 0
+        }
+        
+        .pure-button-acitve,
+        .pure-button:active {
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, .15) inset, 0 0 6px rgba(0, 0, 0, .2) inset
+        }
+        
+        .pure-button-disabled,
+        .pure-button-disabled:active,
+        .pure-button-disabled:focus,
+        .pure-button-disabled:hover,
+        .pure-button[disabled],
+        .pure-button[disabled]:active,
+        .pure-button[disabled]:focus,
+        .pure-button[disabled]:hover {
+            border: 0;
+            background-image: none;
+            opacity: .4;
+            cursor: not-allowed;
+            box-shadow: none
+        }
+        
+        .pure-button-hidden {
+            display: none
+        }
+        
+        .pure-button-primary,
+        .pure-button-selected,
+        a.pure-button-primary,
+        a.pure-button-selected,
+        button.pure-button-primary,
+        button.pure-button-selected {
+            background-color: #0078e7;
+            color: #fff
+        }
+        
+        .question_view {
+            margin: 20px auto;
+            max-width: 640px;
+            width: 90%;
+            padding: 0 0 200px 0
+        }
+        
+        .question_view img {
+            background: rgba(99, 99, 99, .2)
+        }
+        
+        #collection {
+            display: none;
+            position: relative
+        }
+        
+        #collection img {
+            aspect-ratio: 2
+        }
+        
+        #collection>li {
+            zoom: 1;
+            padding: .625em 0;
+            list-style: none;
+            display: none
+        }
+        
+        #collection>li:after {
+            clear: both;
+            height: 0;
+            content: "\20";
+            overflow: hidden
+        }
+        
+        .main_view {
+            margin: 10px auto;
+            box-sizing: border-box
+        }
+        
+        @media only screen and (max-width:720px) {
+            .main_view {
+                margin: 20px auto 0;
+                position: relative;
+                padding: 0
+            }
+        }
+        
+        @media only screen and (min-width:880px) {
+            .main_view {
+                max-width: 970px
+            }
+        }
+        
+        .question {
+            font-weight: 700;
+            font-size: 1.25em;
+            margin-bottom: 1em
+        }
+        
+        .answer {
+            border-radius: 5px;
+            font-size: 1em;
+            margin: 5px 0 15px;
+            padding: 9px;
+            cursor: pointer;
+            border: 2px solid #363;
+            border-width: 1px;
+            border-color: #bbb;
+            color: #333;
+            box-shadow: 0 2px 8px -5px
+        }
+        
+        .answer:hover {
+            border-color: #000
+        }
+        
+        @media only screen and (max-width:720px) {
+            .answer {
+                margin-left: .25em
+            }
+        }
+        
+        .ans-on {
+            border-color: #000;
+            box-shadow: #000 0 0 0 1pt
+        }
+        
+        #start0 {
+            text-align: center;
+            height: 72px;
+            contain: strict
+        }
+        
+        #start0.lib-unld #start {
+            transform: scaleY(.05);
+            pointer-events: none
+        }
+        
+        #start0.lib-unld .content {
+            opacity: 0
+        }
+        
+        #start:active {
+            transform: translateY(1px)
+        }
+        
+        #start {
+            margin: 0 auto 9px;
+            position: relative;
+            background: #fff9;
+            font-size: 1.5em;
+            transition: .6s cubic-bezier(0, 1, 0, 1)
+        }
+        
+        .progress-button .content {
+            position: relative;
+            display: block;
+            z-index: 9;
+            opacity: .7;
+            transition: all .2s ease-out
+        }
+        
+        .progress-button .progress {
+            background: #148544
+        }
+        
+        #start>* {
+            pointer-events: none
+        }
+        
+        #progress-inner {
+            border-radius: 2px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #0078e7;
+            height: 100%;
+            width: 100%;
+            transform: scaleX(0);
+            will-change: transform;
+            transition: all .5s cubic-bezier(0, 0, 0, 1)
+        }
+        
+        #start:hover #progress-inner {
+            background: #075398
+        }
+        
+        @media (hover:hover) and (pointer:fine) {
+            #start0 button .content {
+                display: inline-block;
+                position: relative;
+                transition: .2s cubic-bezier(0, 1, 0, 1)
+            }
+            #start0 button .content::after {
+                content: ' ';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: .2s;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23FFF' d='M496 220 336 76a48 48 0 1 0-64 72l67 60H48a48 48 0 1 0 0 96h291l-67 60a48 48 0 1 0 64 72l160-144a48 48 0 0 0 0-72z'/%3E%3C/svg%3E");
+                width: 17px;
+                height: 100%;
+                background-position: center;
+                background-repeat: no-repeat
+            }
+            #start0 button:hover .content {
+                padding-right: 25px
+            }
+            #start0 button:hover .content::after {
+                opacity: 1;
+                right: 0
+            }
+        }
+        
+        #loading {
+            display: none;
+            text-align: center
+        }
+        
+        #result_details {
+            background: #fff;
+            display: none;
+            padding-bottom: 10px;
+            font-size: .9em;
+            text-align: center;
+            padding: .5em
+        }
+        
+        @media only screen and (max-width:480px) {
+            #result_details {
+                border: none
+            }
+        }
+        
+        #update-info {
+            font-size: .75em;
+            color: #666
+        }
+        
+        #update-info li {
+            padding-right: 15px
+        }
+        
+        #fast-wrap {
+            text-align: center;
+            vertical-align: top;
+            margin: 36px 0 30px
+        }
+        
+        #social-btnext {
+            height: 60px
+        }
+        
+        @media only screen and (max-width:480px) {
+            #social-btnext {
+                height: 50px
+            }
+        }
+        
+        #more-btnext {
+            margin-top: 15px;
+            height: 50px
+        }
+        
+        .blink_me {
+            animation-name: blinker;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite
+        }
+        
+        @keyframes blinker {
+            0% {
+                opacity: 1
+            }
+            50% {
+                opacity: 0
+            }
+            100% {
+                opacity: 1
+            }
+        }
+        
+        .samelang_links {
+            margin-top: 15px;
+            font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+            list-style-type: circle;
+            color: #ccc
+        }
+        
+        .samelang_links a {
+            text-decoration: none;
+            color: #999
+        }
+        
+        .samelang_links a:hover {
+            text-decoration: underline;
+            color: #000
+        }
+        
+        .samelang_links a.current {
+            color: #000;
+            font-weight: 700
+        }
+        
+        .samelang_links_img {
+            text-align: center;
+            margin: 30px auto 0;
+            max-width: 999px;
+            width: 98%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between
+        }
+        
+        .samelang_links_img a {
+            margin: 10px 0;
+            box-shadow: 0 1px 5px 0 rgba(38, 38, 38, .1);
+            transition: all .2s ease 0s;
+            color: #000;
+            text-decoration: none;
+            box-sizing: border-box;
+            border-radius: 5px;
+            vertical-align: top;
+            width: 32%
+        }
+        
+        .samelang_links_img a:hover {
+            color: #0078e7;
+            transform: scale(1.01);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .5)
+        }
+        
+        @media only screen and (max-width:480px) {
+            .samelang_links_img a {
+                color: #000;
+                width: 49%;
+                margin: 10px 1px;
+                background: 0 0;
+                border: none;
+                vertical-align: top
+            }
+        }
+        
+        @media only screen and (max-width:480px) {
+            .samelang_links_img {
+                margin-top: 30px;
+                content-visibility: auto;
+                contain-intrinsic-size: 1px 2000px
+            }
+        }
+        
+        @media only screen and (max-width:720px) {
+            .samelang_links {
+                list-style: none
+            }
+            .samelang_links a {
+                display: block;
+                margin: 10px 0 10px -10px;
+                padding: 10px 0;
+                font-size: 1em;
+                text-align: center
+            }
+        }
+        
+        .samelang_links_img b {
+            display: block;
+            font-size: .8em;
+            padding: 3px 0 5px;
+            text-decoration: none;
+            word-wrap: break-word;
+            max-width: 200px;
+            text-align: center;
+            margin: 0 auto
+        }
+        
+        .samelang_links_img img {
+            width: 100%;
+            border-radius: 5px 5px 0 0;
+            height: inherit;
+            margin: 0
+        }
+        
+        .leader_ad_banner,
+        .leader_ad_banner ins,
+        .lowerad,
+        .lowerad ins {
+            max-width: 970px;
+            min-height: 280px;
+            margin: auto
+        }
+        
+        .leader_ad_banner,
+        .lowerad {
+            contain: strict
+        }
+        
+        .leader_ad_banner {
+            margin-top: 5px
+        }
+        
+        .leader_ad_banner,
+        .leader_ad_banner>ins {
+            min-height: 264px
+        }
+        
+        .leader_ad_banner>ins,
+        .lowerad>ins {
+            width: 98%
+        }
+        
+        .google-anno {
+            color: #090
+        }
+        
+        @media only screen and (min-width:970px) {
+            .leader_ad_banner>ins {
+                width: 100%
+            }
+        }
+        
+        .leader_ad_banner,
+        .lowerad {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+        
+        @media only screen and (max-width:480px) {
+            .lowerad {
+                height: 304px!important
+            }
+        }
+        
+        @media only screen and (max-width:720px) {
+            .lowerad {
+                height: 304px!important
+            }
+        }
+        
+        @media (width:360px) {
+            .lowerad {
+                height: 304px!important
+            }
+        }
+        
+        @media (width:375px) {
+            .lowerad {
+                height: 315px!important
+            }
+        }
+        
+        @media (width:390px) {
+            .lowerad {
+                height: 330px!important
+            }
+        }
+        
+        @media (width:414px) {
+            .lowerad {
+                height: 348px!important
+            }
+        }
+        
+        .again {
+            display: block;
+            text-align: center;
+            width: 67%;
+            max-width: 300px;
+            margin: 25px auto 9px;
+            padding: 10px 5px;
+            text-decoration: none;
+            border: 1px solid #bbb;
+            color: #666;
+            position: relative;
+            border-radius: 5px;
+            background: #fff
+        }
+        
+        .again svg {
+            position: absolute;
+            left: 10px;
+            top: 9px;
+            transition: .2s ease-out
+        }
+        
+        .again:hover {
+            border-color: #777;
+            color: #333
+        }
+        
+        .again:hover svg {
+            transform: rotate(-90deg)
+        }
+        
+        @media only screen and (max-width:480px) {
+            #chart-container {
+                width: 100%
+            }
+        }
+        
+        .momo {
+            margin: 40px 0 9px;
+            font-size: .8em;
+            color: #999;
+            opacity: 0
+        }
+        
+        #features_details,
+        #question_details {
+            display: none
+        }
+        
+        #qe-rslt-title {
+            color: #666
+        }
+        
+        #qe-rslt-title b {
+            color: #000;
+            margin: 0 9px
+        }
+        
+        #homelink {
+            width: 98%;
+            margin: 30px auto;
+            display: flex;
+            justify-content: space-between;
+            max-width: 999px
+        }
+        
+        #homelink a {
+            color: #eee;
+            background: #006400;
+            padding: 16px 21px;
+            text-decoration: none;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 49.5%;
+            max-width: 500px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            font-size: 20px
+        }
+        
+        #homelink a svg {
+            margin-right: 6px
+        }
+        
+        #homelink #qr_generator_web {
+            background: #666
+        }
+        
+        @media only screen and (max-width:480px) {
+            #homelink a#qr_generator_web {
+                margin-top: 3px;
+                font-size: .9em;
+                padding: 11px
+            }
+            #homelink {
+                flex-direction: column
+            }
+            #homelink a {
+                width: 100%
+            }
+            #homelink {
+                justify-content: space-around
+            }
+        }
+        
+        .arm-easeout-slow {
+            transition: all 1s ease-out
+        }
+        
+        .arm-easeout {
+            transition: all .2s ease-out
+        }
+        
+         ::-moz-selection {
+            background: #060;
+            color: #9f9
+        }
+        
+         ::selection {
+            background: #060;
+            color: #9f9
+        }
+        
+        .pointer-events-none {
+            pointer-events: none
+        }
+    </style>
+    <style>
+        #iq-number {
+            font-size: 6em;
+            margin: 0
+        }
+        
+        #iq-description {
+            font-size: 1em;
+            font-weight: 700;
+            margin: 0;
+            padding: 10px;
+            border-radius: 15px
+        }
+        
+        #iq-description span {
+            white-space: nowrap
+        }
+        
+        .iq-result-ing {
+            color: #666
+        }
+        
+        .iq-result-show {
+            color: #333
+        }
+        
+        table.q {
+            margin-top: 5px;
+            font-size: .7em;
+            font-weight: 400;
+            text-align: center;
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+        
+        table.q td {
+            border: 1px #bbb solid;
+            padding: 5px
+        }
+        
+        .ddd {
+            white-space: normal;
+            text-align: left
+        }
+        
+        .dd1 {
+            white-space: normal;
+            text-align: center
+        }
+        
+        .xxx {
+            font-size: 22px;
+            vertical-align: middle;
+            margin: 5px auto;
+            font-weight: 400
+        }
+        
+        .meta-score {
+            font-size: .5em
+        }
+        
+        .ans-correct,
+        .ans-incorrect {
+            background-repeat: no-repeat;
+            background-position-x: right;
+            background-position-y: center
+        }
+        
+        .ans-correct {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMzJweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMzIgMjAiPjxwYXRoIGZpbGw9IiMzNDdFMkUiIGQ9Ik0gMjYgMy4zTCAyMi43IDAgOS4yNSAxMy41IDMuMTUgNy40NSAwIDEwLjcgOS4yNSAxOS45NSAyNiAzLjMgWiIvPjwvc3ZnPg==)
+        }
+        
+        .ans-incorrect {
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMzFweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMzEgMjAiPjxwYXRoIGZpbGw9IiNGRjAwMDAiIGQ9Ik0gMTMuMiAxMEwgMjAgMy4yIDE2Ljc1IDAgMTAgNi43NSAzLjIgMCAwIDMuMiA2Ljc1IDEwIDAgMTYuNzUgMy4yIDIwIDEwIDEzLjIgMTYuNzUgMjAgMjAgMTYuNzUgMTMuMiAxMCBaIi8+PC9zdmc+)
+        }
+        
+        .category-wrap a {
+            color: #999;
+            text-decoration: none;
+            font-style: italic
+        }
+        
+        .category-wrap a:hover {
+            color: #000
+        }
+        
+        .tag-wrap {
+            margin: 30px auto
+        }
+        
+        .tag-wrap a {
+            font-size: .5em;
+            text-decoration: none;
+            display: inline-flex;
+            padding: 0 11px 0 8px;
+            border-radius: 99px 0 0 99px;
+            color: #333;
+            background: #eee;
+            margin: 3px;
+            box-shadow: 0 1px 0 0 rgba(38, 38, 38, .1);
+            border: 1px solid #ddd;
+            align-items: center;
+            width: fit-content;
+            height: 26px
+        }
+        
+        .tag-wrap a:before {
+            content: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%229%22%20viewBox%3D%220%200%2020%2020%22%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%2210%22%20fill%3D%22%23bbb%22%3E%3C%2Fcircle%3E%3C%2Fsvg%3E);
+            margin-right: 4px;
+            line-height: 0
+        }
+        
+        .tag-wrap a:hover {
+            background: #efe
+        }
+    </style>
+    <style>
+        .dda-cons+p,
+        .dda-pros+p {
+            margin: .2em 1.38em 1em
+        }
+        
+        .dda-cons,
+        .dda-pros {
+            margin-bottom: 0
+        }
+        
+        .dda-pros::before {
+            content: "💪";
+            margin-right: .2em
+        }
+        
+        .dda-cons::before {
+            content: "😞";
+            margin-right: .2em
+        }
+        
+        .dda-rep::before {
+            content: "🎬";
+            margin-right: .2em
+        }
+        
+        h4 {
+            text-align: center;
+            font-style: italic;
+            margin-top: 9px;
+            font-weight: 400
+        }
+        
+        .dda-section {
+            margin-bottom: 3em
+        }
+        
+        #alignment-chart {
+            max-width: 720px;
+            width: 100%
+        }
+        
+        .dda-section h5,
+        .dda-your-desc h5 {
+            font-size: 1.1em
+        }
+        
+        .dda-demo,
+        dda-demo2 {
+            max-width: 600px
+        }
+        
+        .dda-demo text {
+            text-anchor: middle;
+            alignment-baseline: central;
+            font-size: 2em
+        }
+        
+        .dda-demo-2 text {
+            text-anchor: start;
+            alignment-baseline: central;
+            font-size: 1.4em
+        }
+        
+        .dda-demo-2 text.snap-right {
+            text-anchor: end
+        }
+        
+        .dda-demo-2 text.dda-tsmall {
+            fill: #777;
+            font-size: 1.2em
+        }
+        
+        .dda-demo-2 rect {
+            filter: drop-shadow(2px 2px 1px #999)
+        }
+    </style>
+    <style>
+        table.extra-hv {
+            margin: 9px auto 0;
+            font-size: 11px;
+            border-collapse: collapse;
+            width: 100%
+        }
+        
+        table.extra-hv td,
+        table.extra-hv th {
+            text-align: center;
+            border: 1px solid #999;
+            padding: 5px
+        }
+        
+        table.extra-hv th {
+            background: #ccc;
+            color: #000
+        }
+        
+        table.extra-hv tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+        
+        table.extra-hv caption {
+            caption-side: bottom;
+            margin: 9px;
+            opacity: .8
+        }
+        
+        table.extra-hv caption ul {
+            text-align: left;
+            padding: 0 1em
+        }
+        
+        .subtip a {
+            color: #090
+        }
+        
+        #tips_extra {
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: space-evenly;
+            max-width: 1015px;
+            margin: 0 auto;
+            text-align: left;
+            color: #555
+        }
+        
+        .subtip {
+            width: 48%;
+            padding: 9px;
+            box-sizing: border-box;
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 300px
+        }
+        
+        .subtip h3 {
+            margin-left: -6px
+        }
+        
+        #splash .subtip p {
+            padding: 0
+        }
+        
+        .subtip.submain {
+            width: 98%;
+            margin: 0 auto
+        }
+        
+        .subtip.submain h2 {
+            font-size: 1.5em;
+            margin-bottom: 0
+        }
+        
+        @media (max-width:780px) {
+            .subtip h3 {
+                margin-left: 0
+            }
+            #tips_extra {
+                flex-direction: column
+            }
+            .subtip {
+                width: 100%
+            }
+            table.extra-hv.large-width {
+                display: block;
+                overflow-x: auto
+            }
+        }
+        
+        @media (min-width:1900px) {
+            #tips_extra {
+                max-width: 1525px
+            }
+        }
+    </style>
+    <style>
+        .cele-wrap {
+            width: 150px;
+            text-align: center;
+            background: #9992;
+            padding: .5em;
+            border-radius: 6px
+        }
+        
+        #cele-charts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+            justify-content: center;
+            margin: 1em
+        }
+        
+        #cele-charts h4 {
+            margin: 0;
+            min-height: 49px;
+            display: flex;
+            justify-content: center;
+            align-items: end
+        }
+        
+        #cele-charts h5 {
+            margin: 5px;
+            font-style: italic;
+            opacity: .6;
+            font-size: .7em;
+            font-weight: 400
+        }
+        
+        .cele-chart svg {
+            width: 120px
+        }
+        
+        .cele-chart svg circle {
+            fill: #fff;
+            stroke: #000;
+            stroke-width: 9px
+        }
+        
+        #collection li::before {
+            display: block;
+            margin: 1em auto;
+            width: 100%;
+            text-align: center;
+            color: grey;
+            font-style: italic
+        }
+        
+        #q1::before {
+            content: "Section I - Family Views - 1/6"
+        }
+        
+        #q2::before {
+            content: "Section I - Family Views - 2/6"
+        }
+        
+        #q3::before {
+            content: "Section I - Family Views - 3/6"
+        }
+        
+        #q4::before {
+            content: "Section I - Family Views - 4/6"
+        }
+        
+        #q5::before {
+            content: "Section I - Family Views - 5/6"
+        }
+        
+        #q6::before {
+            content: "Section I - Family Views - 6/6"
+        }
+        
+        #q7::before {
+            content: "Section II - Friendship Views - 1/6"
+        }
+        
+        #q8::before {
+            content: "Section II - Friendship Views - 2/6"
+        }
+        
+        #q9::before {
+            content: "Section II - Friendship Views - 3/6"
+        }
+        
+        #q10::before {
+            content: "Section II - Friendship Views - 4/6"
+        }
+        
+        #q11::before {
+            content: "Section II - Friendship Views - 5/6"
+        }
+        
+        #q12::before {
+            content: "Section II - Friendship Views - 6/6"
+        }
+        
+        #q13::before {
+            content: "Section III - Community Views - 1/6"
+        }
+        
+        #q14::before {
+            content: "Section III - Community Views - 2/6"
+        }
+        
+        #q15::before {
+            content: "Section III - Community Views - 3/6"
+        }
+        
+        #q16::before {
+            content: "Section III - Community Views - 4/6"
+        }
+        
+        #q17::before {
+            content: "Section III - Community Views - 5/6"
+        }
+        
+        #q18::before {
+            content: "Section III - Community Views - 6/6"
+        }
+        
+        #q19::before {
+            content: "Section IV - Political Views - 1/6"
+        }
+        
+        #q20::before {
+            content: "Section IV - Political Views - 2/6"
+        }
+        
+        #q21::before {
+            content: "Section IV - Political Views - 3/6"
+        }
+        
+        #q22::before {
+            content: "Section IV - Political Views - 4/6"
+        }
+        
+        #q23::before {
+            content: "Section IV - Political Views - 5/6"
+        }
+        
+        #q24::before {
+            content: "Section IV - Political Views - 6/6"
+        }
+        
+        #q25::before {
+            content: "Section V - Money Views - 1/6"
+        }
+        
+        #q26::before {
+            content: "Section V - Money Views - 2/6"
+        }
+        
+        #q27::before {
+            content: "Section V - Money Views - 3/6"
+        }
+        
+        #q28::before {
+            content: "Section V - Money Views - 4/6"
+        }
+        
+        #q29::before {
+            content: "Section V - Money Views - 5/6"
+        }
+        
+        #q30::before {
+            content: "Section V - Money Views - 6/6"
+        }
+        
+        #q31::before {
+            content: "Section VI - Law Views - 1/6"
+        }
+        
+        #q32::before {
+            content: "Section VI - Law Views - 2/6"
+        }
+        
+        #q33::before {
+            content: "Section VI - Law Views - 3/6"
+        }
+        
+        #q34::before {
+            content: "Section VI - Law Views - 4/6"
+        }
+        
+        #q35::before {
+            content: "Section VI - Law Views - 5/6"
+        }
+        
+        #q36::before {
+            content: "Section VI - Law Views - 6/6"
+        }
+        
+        #dda-out {
+            stroke-width: 6px;
+            stroke: #000;
+            fill: none
+        }
+        
+        .dda-frames line {
+            stroke-width: 2px;
+            stroke: #0003
+        }
+        
+        .dda-bframes line {
+            stroke-width: 6px;
+            stroke: #000
+        }
+        
+        #dda-result {
+            stroke-width: 6px;
+            fill: #fff;
+            stroke: #000;
+            transform: scale(79);
+            transform-box: fill-box;
+            transform-origin: center
+        }
+        
+        .dda-result-final {
+            transform: none!important
+        }
+        
+        .dda-result-ani {
+            transition: 1s ease-out
+        }
+        
+        #quadrant {
+            margin-top: 2em;
+            container-type: inline-size
+        }
+        
+        #quadrant div {
+            font-size: 3cqw
+        }
+        
+        #quadrant svg {
+            width: 100%;
+            display: block
+        }
+        
+        #quadrant-up {
+            margin-bottom: 3px
+        }
+        
+        #quadrant-left {
+            margin-right: 5px;
+            text-align: right
+        }
+        
+        #quadrant-right {
+            margin-left: 5px;
+            text-align: left
+        }
+        
+        #quadrant-left,
+        #quadrant-right {
+            width: 160px
+        }
+        
+        #quadrant-middle {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+        
+        #quadrant-center-wrap {
+            width: 100%;
+            max-width: 350px;
+            position: relative
+        }
+        
+        #quadrant-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+        
+        .dda-current-quad {
+            stroke: red
+        }
+        
+        #quadrant-left::before {
+            content: "←"
+        }
+        
+        #quadrant-up::before {
+            content: "↑";
+            display: block
+        }
+        
+        #quadrant-right::after {
+            content: "→"
+        }
+        
+        #quadrant-down::after {
+            content: "↓";
+            display: block
+        }
+        
+        .my-dda-level {
+            color: red
+        }
+        
+        #alignment-chart {
+            font-size: 1em
+        }
+        
+        #alignment-chart th,
+        #alignment-chart tr {
+            height: 88px;
+            width: 88px
+        }
+        
+        #alignment-chart caption {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #000;
+            padding: 9px;
+            caption-side: top
+        }
+        
+        #alignment-chart tr:first-child th:first-child {
+            background: linear-gradient(to top right, #0000 49%, #aaa 49.9%, #aaa 50.1%, #0000 51%);
+            line-height: 1.2;
+            padding: .1em .4em;
+            text-align: right
+        }
+        
+        #alignment-chart tr:first-child th:first-child div:nth-child(1) {
+            display: inline-block;
+            width: 50%
+        }
+        
+        #alignment-chart tr:first-child th:first-child div:nth-child(2) {
+            text-align: left;
+            width: 50%
+        }
+        
+        .dda-your-desc.arm-virgin {
+            transform: perspective(99px) rotateY(10deg);
+            opacity: 0
+        }
+        
+        .dda-your-desc {
+            transition: 1s all ease-out;
+            text-align: left;
+            border: 1px solid #999;
+            border-radius: 15px;
+            padding: 1em;
+            margin: 1em
+        }
+        
+        .dda-your-desc h2 {
+            font-size: 2em
+        }
+        
+        .dda-section h2 {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+        
+        .dda-section h2::before {
+            content: "";
+            border: 2px solid #9993;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-size: 100% 100%;
+            margin-right: 8px
+        }
+        
+        .dda-section-0 h2::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cpath fill='%235BE' d='M0 0h30v30H0z'/%3E%3Cpath stroke='%23999' stroke-width='2' d='M0 30h90M0 60h90M30 0v90M60 0v90'/%3E%3C/svg%3E")
+        }
+        
+        .dda-section-1 h2::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cpath fill='%23FE7' d='M30 0h30v30H30z'/%3E%3Cpath stroke='%23999' stroke-width='2' d='M0 30h90M0 60h90M30 0v90M60 0v90'/%3E%3C/svg%3E")
+        }
+        
+        .dda-section-2 h2::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cpath fill='%23F83' d='M60 0h30v30H60z'/%3E%3Cpath stroke='%23999' stroke-width='2' d='M0 30h90M0 60h90M30 0v90M60 0v90'/%3E%3C/svg%3E")
+        }
+        
+        .dda-section-3 h2::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cpath fill='%23DEE' d='M0 30h30v30H0z'/%3E%3Cpath stroke='%23999' stroke-width='2' d='M0 30h90M0 60h90M30 0v90M60 0v90'/%3E%3C/svg%3E")
+        }
+        
+        .dda-section-4 h2::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cpath fill='%236C6' d='M30 30h30v30H30z'/%3E%3Cpath stroke='%23999' stroke-width='2' d='M0 30h90M0 60h90M30 0v90M60 0v90'/%3E%3C/svg%3E")
+        }
+        
+        .dda-section-5 h2::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cpath fill='%23FCD' d='M60 30h30v30H60z'/%3E%3Cpath stroke='%23999' stroke-width='2' d='M0 30h90M0 60h90M30 0v90M60 0v90'/%3E%3C/svg%3E")
+        }
+        
+        .dda-section-6 h2::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cpath fill='%23B8D' d='M0 60h30v30H0z'/%3E%3Cpath stroke='%23999' stroke-width='2' d='M0 30h90M0 60h90M30 0v90M60 0v90'/%3E%3C/svg%3E")
+        }
+        
+        .dda-section-7 h2::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cpath fill='%23989' d='M30 60h30v30H30z'/%3E%3Cpath stroke='%23999' stroke-width='2' d='M0 30h90M0 60h90M30 0v90M60 0v90'/%3E%3C/svg%3E")
+        }
+        
+        .dda-section-8 h2::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'%3E%3Cpath fill='%23C22' d='M60 60h30v30H60z'/%3E%3Cpath stroke='%23999' stroke-width='2' d='M0 30h90M0 60h90M30 0v90M60 0v90'/%3E%3C/svg%3E")
+        }
+        
+        @media only screen and (max-width:500px) {
+            #alignment-chart {
+                font-size: .7em
+            }
+        }
+        
+        .ab_group,
+        .cb_group {
+            border: 1px solid #ccc;
+            margin-bottom: 2em
+        }
+        
+        .cb_group div {
+            font-size: 1em;
+            padding: 9px;
+            cursor: pointer;
+            border-bottom: 1px solid #ccc
+        }
+        
+        .cb_group div:last-child {
+            border: none
+        }
+        
+        .cb_selected {
+            background: #cfc
+        }
+        
+        .ab_group div {
+            font-size: 1em;
+            padding: 9px;
+            cursor: pointer;
+            border-bottom: 1px solid #ccc;
+            padding-left: 30px;
+            position: relative
+        }
+        
+        .ab_group div:last-child {
+            border: none
+        }
+        
+        .ab_selected {
+            background: #cfc
+        }
+        
+        .ab_sort_id {
+            position: absolute;
+            color: #efe;
+            top: 0;
+            left: 4px;
+            bottom: 0;
+            margin: auto;
+            background: #060;
+            border-radius: 50%;
+            text-align: center;
+            height: 24px;
+            width: 24px;
+            line-height: 24px;
+            font-size: .77em
+        }
+        
+        .unclickable {
+            pointer-events: none;
+            color: #888;
+            opacity: .5
+        }
+        
+        .rcmd-qz {
+            padding: 0 1em;
+            text-align: center
+        }
+        
+        .rcmd-qz h6 {
+            margin: 2em 0 0;
+            text-align: center;
+            font-size: 1em;
+            font-weight: 400
+        }
+        
+        .rcmd-qz a {
+            border: 1px solid #00880073;
+            box-sizing: border-box;
+            padding: 3px 9px;
+            display: inline-block;
+            color: #080;
+            background: #eaf0ea;
+            font-size: .7em;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: .1s
+        }
+        
+        .rcmd-qz a.rcmd-crnt,
+        .rcmd-qz a:hover,
+        .result_case.rcmd-qz a.rcmd-crnt,
+        .result_case.rcmd-qz a:hover {
+            color: #fff;
+            background: #494
+        }
+        
+        .rcmd-qz ul {
+            margin-top: .6em;
+            padding: 0;
+            list-style: none
+        }
+        
+        .rcmd-qz ul li {
+            display: inline-block;
+            margin: 5px 3px
+        }
+        
+        .result_case {
+            text-align: left;
+            background: #efe;
+            padding: 15px!important;
+            border: 1px solid #6a6;
+            border-radius: 5px;
+            margin: 1em auto
+        }
+        
+        .result_case.rcmd-qz {
+            text-align: center
+        }
+        
+        .result_case.rcmd-qz a {
+            background: #b9f5b9
+        }
+    </style>
+    <style>
+        nav#arm_topnav {
+            color: #999;
+            height: 42px;
+            background: #e5e5e5;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 888;
+            contain: style layout size
+        }
+        
+        #arm_topnav_outwrap {
+            visibility: hidden;
+            max-width: 999px;
+            width: 98%;
+            margin: 0 auto;
+            user-select: none
+        }
+        
+        #arm_topnav_wrap {
+            display: flex;
+            height: 42px;
+            align-items: center
+        }
+        
+        nav#arm_topnav i {
+            cursor: pointer;
+            justify-content: center;
+            display: flex;
+            height: 42px;
+            width: 42px
+        }
+        
+        nav#arm_topnav i svg {
+            width: 16px;
+            vertical-align: middle
+        }
+        
+        nav#arm_topnav i svg path {
+            fill: #333
+        }
+        
+        nav#arm_topnav i:hover {
+            background: #ddd
+        }
+        
+        nav#arm_topnav i:hover svg path {
+            fill: #000
+        }
+        
+        #arm_topnav_home {
+            text-decoration: none;
+            font-family: sans-serif, system-ui;
+            font-weight: 700;
+            padding: 7px 9px;
+            font-size: 14px
+        }
+        
+        .nav-logo-t1 {
+            color: #000
+        }
+        
+        .nav-logo-t2 {
+            color: #f53c02
+        }
+        
+        #arm_topnav_home:hover {
+            filter: brightness(1.2)
+        }
+        
+        #arm_mybar_close,
+        #arm_topnav_close {
+            display: none
+        }
+        
+        #arm_topnav_mycontent,
+        #arm_topnav_sidebar {
+            display: none;
+            background: #e5e5e5;
+            padding: 9px 33px
+        }
+        
+        #arm_topnav_mycontent {
+            min-height: 250px;
+            max-height: 75vh;
+            overflow-y: auto;
+            overscroll-behavior: contain
+        }
+        
+        #arm_topnav_sidebar {
+            max-height: 85vh;
+            overflow-y: auto;
+            overscroll-behavior: contain
+        }
+        
+        #arm_topnav_mycontent.mybar_virgin {
+            background: 0 0
+        }
+        
+        #arm_topnav_sidebar h2 {
+            text-align: left;
+            margin-top: 0;
+            margin-bottom: 9px;
+            font-size: .9em;
+            color: #000
+        }
+        
+        #arm_topnav_sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 0
+        }
+        
+        #arm_topnav li {
+            display: inline-block;
+            padding: 2px 7px;
+            background: #9991;
+            margin: 1px;
+            border-radius: 4px
+        }
+        
+        #arm_topnav li:hover {
+            background: #0963
+        }
+        
+        #arm_topnav_sidebar a {
+            font-size: .8em;
+            color: #777;
+            text-decoration: none;
+            padding: 5px 0;
+            display: inline-block
+        }
+        
+        #arm_topnav_sidebar a[title=Revocation] {
+            display: none
+        }
+        
+        #arm_topnav_sidebar a:hover {
+            color: #188038
+        }
+        
+        #nav-overlay {
+            position: fixed;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: #000000AA;
+            -webkit-backdrop-filter: blur(9px);
+            backdrop-filter: blur(9px);
+            display: none
+        }
+        
+        .arm_top_nav_cards {
+            display: flex;
+            flex-wrap: wrap
+        }
+        
+        .arm_top_nav_card {
+            width: 33.33%;
+            margin: 10px 0 10px 0
+        }
+        
+        #arm_topnav_mybar {
+            margin-left: auto
+        }
+        
+        .mybar-unload {
+            display: none
+        }
+        
+        .mybar-loading {
+            font-size: 3em;
+            text-align: center
+        }
+        
+        .nav-category {
+            color: #777;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 7px 9px;
+            font-family: sans-serif, system-ui
+        }
+        
+        .nav-category:hover {
+            color: #f53c02
+        }
+        
+        .breadcrumb-sep {
+            width: 7px;
+            margin: 0 12px
+        }
+        
+        @media only screen and (max-width:600px) {
+            .arm_top_nav_card {
+                width: 100%
+            }
+            .arm_top_nav_card:last-child {
+                margin-bottom: 9em
+            }
+            #arm_topnav_sidebar h2,
+            .arm_top_nav_cards {
+                text-align: center
+            }
+            #arm_topnav_mycontent,
+            #arm_topnav_sidebar {
+                padding: 9px 7px
+            }
+            .breadcrumb-sep {
+                width: 6px;
+                margin: 0 9px
+            }
+        }
+        
+        @media only screen and (max-width:480px) {
+            .breadcrumb-sep {
+                width: 5px;
+                margin: 0 2px
+            }
+            #nav-overlay {
+                -webkit-backdrop-filter: none;
+                backdrop-filter: none
+            }
+        }
+        
+        @media (min-width:480px) {
+            #arm_topnav_home:hover,
+            .nav-category:hover {
+                background: #9992;
+                border-radius: 4px
+            }
+        }
+        
+        @media (min-height:600px) {
+            #arm_topnav {
+                position: sticky!important;
+                top: 0
+            }
+        }
+    </style>
+    <style id="darkmode">
+        @media (prefers-color-scheme:dark) {
+            body,
+            html {
+                background: #000
+            }
+            h1 {
+                background: #0e4c21;
+                color: #fff;
+                opacity: .87
+            }
+            .hint {
+                background: #1d1d1d;
+                color: #a4a4a4
+            }
+            #update-info {
+                color: #707070
+            }
+            #update-info span {
+                background: #131!important;
+                color: #898!important
+            }
+            .questionWrapper {
+                color: rgba(255, 255, 255, .6)
+            }
+            .answer {
+                color: rgba(255, 255, 255, .6);
+                background-color: #1d1d1d;
+                border-color: #373737;
+                box-shadow: none
+            }
+            .answer:hover {
+                border-color: #357238;
+                background-color: #1f2720
+            }
+            .ans-on {
+                border-color: #777;
+                box-shadow: #777 0 0 0 1pt
+            }
+            .ow-open-btn {
+                background: #323232!important;
+                color: rgba(255, 255, 255, .6)!important
+            }
+            .ow-open-btn svg path {
+                fill: rgba(255, 255, 255, .6)!important
+            }
+            .ow-open-btn:hover {
+                color: #fff!important;
+                background: #1d1d1d!important
+            }
+            .ow-open-btn:hover svg path {
+                fill: #fff!important
+            }
+            #qe-rslt-title {
+                color: #888!important
+            }
+            #qe-rslt-title b {
+                color: #aaa!important
+            }
+            #result_details {
+                background: #000
+            }
+            .again {
+                background: #1d1d1d;
+                color: rgba(255, 255, 255, .6);
+                border: 1px solid #373737
+            }
+            .again:hover {
+                border-color: #357238;
+                background: #1f2720;
+                color: rgba(255, 255, 255, .6)
+            }
+            #iq-description {
+                border-color: transparent
+            }
+            .samelang_links_img a {
+                background: #222!important;
+                color: #686!important
+            }
+            .samelang_links_img img {
+                filter: brightness(.6)!important
+            }
+            .samelang_links_img a:hover {
+                background: #333!important;
+                color: #aca!important
+            }
+            .samelang_links_img a:hover img {
+                filter: brightness(1)!important
+            }
+            .subtip {
+                color: #999
+            }
+            .subtip h3 {
+                color: #aaa
+            }
+            #homelink #arealme_home {
+                color: rgba(255, 255, 255, .6);
+                background: #0e4c21!important
+            }
+            #homelink #arealme_home svg path {
+                fill: #92c18b
+            }
+            #homelink #qr_generator_web {
+                background: #242424!important
+            }
+            #homelink #qr_generator_web svg rect {
+                fill: rgba(255, 255, 255, .3)
+            }
+            .cps-test-stats path#cps-svg-arrow,
+            .cps-test-stats text {
+                fill: #aaa!important
+            }
+            .rcmd-qz a {
+                border: 1px solid #3a413b;
+                background: #1f2720;
+                color: #459944
+            }
+            .result_case {
+                background: #111;
+                border: none
+            }
+            .result_case.rcmd-qz a {
+                border: 1px solid #3a413b;
+                background: #1f2720;
+                color: #459944
+            }
+            .rcmd-qz h6 {
+                color: #898
+            }
+            .rcmd-qz a.rcmd-crnt,
+            .rcmd-qz a:hover,
+            .result_case.rcmd-qz a.rcmd-crnt,
+            .result_case.rcmd-qz a:hover {
+                color: #fff;
+                opacity: .87;
+                border: 1px solid #4d8350
+            }
+            table.extra-hv {
+                color: #999
+            }
+            table.extra-hv td {
+                background: #111;
+                color: #999
+            }
+            table.extra-hv th {
+                background: #333;
+                color: #aaa
+            }
+            table.extra-hv tr:nth-child(even) td {
+                background-color: #222
+            }
+            table.extra-hv tbody {
+                background: #121
+            }
+            .tag-wrap a {
+                color: #eee;
+                background: #333;
+                box-shadow: none;
+                border: 1px solid #666
+            }
+            .tag-wrap a:hover {
+                background: #363
+            }
+            .category-wrap a:hover {
+                color: #fff
+            }
+            nav#arm_topnav {
+                background: #31353e
+            }
+            .nav-logo-t1 {
+                color: #bbb
+            }
+            nav#arm_topnav i svg path {
+                fill: #bbb
+            }
+            #arm_topnav_sidebar {
+                background: #31353e
+            }
+            #arm_topnav_sidebar a {
+                color: #bbb
+            }
+            #arm_topnav_sidebar h2 {
+                color: #ddd
+            }
+            #arm_topnav_sidebar a:hover {
+                color: #fff
+            }
+            nav#arm_topnav i:hover {
+                background: #2c3038
+            }
+            nav#arm_topnav i:hover svg path {
+                fill: #fff
+            }
+             ::-moz-selection {
+                background: #090;
+                color: #000
+            }
+             ::selection {
+                background: #090;
+                color: #000
+            }
+            #back_button svg path {
+                fill: #aaa!important
+            }
+            #back_button b {
+                color: #aaa!important
+            }
+            .ab_selected {
+                background: #030
+            }
+            .ab_item:first-child {
+                border-radius: 5px 5px 0 0
+            }
+            .ab_item:last-child {
+                border-radius: 0 0 5px 5px
+            }
+            .ab_group,
+            .ab_group div {
+                border-color: #666
+            }
+            .cb_selected {
+                background: #030
+            }
+            .cb_item:first-child {
+                border-radius: 5px 5px 0 0
+            }
+            .cb_item:last-child {
+                border-radius: 0 0 5px 5px
+            }
+            .cb_group,
+            .cb_group div {
+                border-color: #666
+            }
+            .ab_sort_id {
+                background: 0 0;
+                font-size: .9em
+            }
+            #dda-out {
+                stroke: #fff;
+                fill: none
+            }
+            .dda-frames line {
+                stroke-width: 2px;
+                stroke: #fff3
+            }
+            .dda-bframes line {
+                stroke-width: 6px;
+                stroke: #fff
+            }
+            #dda-result {
+                stroke-width: 6px;
+                fill: #000;
+                stroke: #fff
+            }
+            #quadrant div {
+                font-size: 2.3cqw;
+                color: #fff
+            }
+            #alignment-chart caption {
+                color: #fff
+            }
+            .dda-section h2::before {
+                border: 2px solid #fff3
+            }
+            .dda-quads {
+                filter: brightness(.7)
+            }
+            #quadrant .my-dda-level {
+                color: #ff5
+            }
+        }
+    </style>
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+    <link rel="alternate" href="https://www.arealme.com/alignment-test/en/" hreflang="en" />
+    <link rel="alternate" href="https://www.arealme.com/alignment-test/cn/" hreflang="zh-Hans" />
+    <link rel="alternate" href="https://www.arealme.com/alignment-test/zh/" hreflang="zh-Hant" />
+    <link rel="alternate" href="https://www.arealme.com/alignment-test/ko/" hreflang="ko" />
+    <link rel="alternate" href="https://www.arealme.com/alignment-test/ja/" hreflang="ja" />
+    <link rel="alternate" href="https://www.arealme.com/alignment-test/th/" hreflang="th" />
+    <link rel="alternate" href="https://www.arealme.com/alignment-test/es/" hreflang="es" />
+    <link rel="alternate" href="https://www.arealme.com/alignment-test/fr/" hreflang="fr" />
+    <link rel="alternate" href="https://www.arealme.com/alignment-test/id/" hreflang="id" />
+    <link rel="alternate" href="https://www.arealme.com/alignment-test/en/" hreflang="x-default" />
+</head>
+
+<body>
+    <div id="nav-overlay"></div>
+    <nav id="arm_topnav">
+        <div id="arm_topnav_outwrap">
+            <div id="arm_topnav_wrap"><i id="arm_topnav_toggle"><svg id="arm_topnav_open" viewbox="0 0 16 12"><path d="M0 0h16v2H0zM0 5h16v2H0zM0 10h16v2H0z"></path></svg><svg id="arm_topnav_close" viewbox="0 0 24 24"><path d="M14 12.1l6.1-6.15-2-1.85-6 6.1-6.2-6.1L4.1 6l6.1 6.15-6 6 1.85 1.9 6.15-6.1 6 6.1 1.9-1.9-6.1-6z"></path></svg></i>
+                <a id="arm_topnav_home" href="https://www.arealme.com/"><b class="nav-logo-t1">AREAL</b><b class="nav-logo-t2">ME</b></a><i id="arm_topnav_mybar"><svg id="arm_mybar_open" viewbox="0 0 504 448" style="width:23px"><path d="M235 139v106l91 55 15-26-74-45v-90z"></path><path d="M256 32C150 32 64 118 64 224H0l83 83 2 3 86-86h-64a149 149 0 1 1 44 105l-31 31A192 192 0 1 0 256 32z"></path></svg><svg id="arm_mybar_close" viewbox="0 0 24 24"><path d="M14 12.1l6.1-6.15-2-1.85-6 6.1-6.2-6.1L4.1 6l6.1 6.15-6 6 1.85 1.9 6.15-6.1 6 6.1 1.9-1.9-6.1-6z"></path></svg></i></div>
+            <div id="arm_topnav_sidebar">
+                <div class="arm_top_nav_cards">
+                    <div class="arm_top_nav_card">
+                        <h2>Trending</h2>
+                        <ul>
+                            <li><a title="CPS Test" href="https://www.arealme.com/click-speed-test/en/">CPS Test</a></li>
+                            <li><a title="Gay Test" href="https://www.arealme.com/gay-test/en/">Gay Test</a></li>
+                            <li><a title="Mental Age Test" href="https://www.arealme.com/mental/en/">Mental Age Test</a></li>
+                            <li><a title="Rice Purity Test" href="https://www.arealme.com/rice-purity-test/en/">Rice Purity Test</a></li>
+                            <li><a title="Reaction Time Test" href="https://www.arealme.com/reaction-test/en/">Reaction Time Test</a></li>
+                            <li><a title="When Will I Die?" href="https://www.arealme.com/when-will-i-die/en/">When Will I Die?</a></li>
+                            <li><a title="What Animal Am I?" href="https://www.arealme.com/what-animal-am-i/en/">What Animal Am I?</a></li>
+                            <li><a title="Spirit Animal Quiz" href="https://www.arealme.com/spirit-animal-quiz/en/">Spirit Animal Quiz</a></li>
+                            <li><a title="Typing Test" href="https://www.arealme.com/typing-test/en/">Typing Test</a></li>
+                            <li><a title="Spacebar Test" href="https://www.arealme.com/spacebar-test/en/">Spacebar Test</a></li>
+                            <li><a title="IQ Test" href="https://www.arealme.com/iq/en/">IQ Test</a></li>
+                            <li><a title="Multidimensional Love Styles Test - Take this test now to find out what you need from your partner!" href="https://www.arealme.com/love-language-test/en/">Love Styles Test</a></li>
+                            <li><a title="1 to 50 - How Fast Can You Click From ONE to FIFTY?" href="https://www.arealme.com/1-to-50/en/">1 to 50 Game</a></li>
+                            <li><a title="Attachment Style Quiz - What Type of Relationship Attachments Do You Form?" href="https://www.arealme.com/relationship-attachment-style-test/en/">Attachment Style Quiz</a></li>
+                            <li><a title="Which South Park Character Are You?" href="https://www.arealme.com/which-south-park-character-are-you/en/">South Park Test</a></li>
+                            <li><a title="Alignment Test - An assessment designed to determine a person's moral and ethical outlook, as defined by the nine alignments in Dungeons & Dragons." href="https://www.arealme.com/alignment-test/en/">Alignment Test</a></li>
+                            <li><a title="Kinsey Scale Test" href="https://www.arealme.com/kinsey-scale-test/en/">Kinsey Scale Test</a></li>
+                            <li><a title="Harry Potter House Quiz" href="https://www.arealme.com/harry-potter-house-sort/en/">Harry Potter House Quiz</a></li>
+                            <li><a title="Autism Spectrum Test" href="https://www.arealme.com/autism-spectrum-test/en/">Autism Spectrum Test</a></li>
+                        </ul>
+                    </div>
+                    <div class="arm_top_nav_card">
+                        <h2>Featured</h2>
+                        <ul>
+                            <li><a title="BMI Calculator" href="https://www.arealme.com/bmi-calculator/en/">BMI Calculator</a></li>
+                            <li><a title="Percentage Calculator" href="https://percentage-calculator.io/">Percentage Calculator</a></li>
+                            <li><a title="Sexuality Test" href="https://www.arealme.com/sexuality-orientation-test/en/">Sexuality Test</a></li>
+                            <li><a title="Inkblot Test" href="https://www.arealme.com/inkblot-test/en/">Inkblot Test</a></li>
+                            <li><a title="Gaslighting Test" href="https://www.arealme.com/gaslighting-test/en/">Gaslighting Test</a></li>
+                            <li><a title="What Periodic Element Am I?" href="https://www.arealme.com/what-chemical-element-are-you/en/">What Periodic Element Am I?</a></li>
+                            <li><a title="Enneagram Test" href="https://www.arealme.com/enneagram-test/en/">Enneagram Test</a></li>
+                            <li><a title="16 Personality Test" href="https://www.arealme.com/16types/en/">16 Personality Test</a></li>
+                            <li><a title="Online English Vocabulary Size Test" href="https://www.arealme.com/vocabulary-size-test/en/">Vocabulary Size Test</a></li>
+                            <li><a title="Comprehensive Knowledge of the UK Radar Test" href="https://www.arealme.com/uk-comprehensive-knowledge-test/en/">Ultimate UK Trivia Test</a></li>
+                            <li><a title="Comprehensive Knowledge of the US Radar Test" href="https://www.arealme.com/us-comprehensive-knowledge-test/en/">Ultimate US Trivia Test</a></li>
+                            <li><a title="What should I draw? - Pick your daily drawing ideas here" href="https://www.arealme.com/what-should-i-draw/en/">What Should I Draw?</a></li>
+                            <li><a title="Key Test - keyboard test / keyboard tester" href="https://key-test.com/">Key Test</a></li>
+                            <li><a title="Mouse Polling Rate Test" href="https://www.arealme.com/mouse-polling-rate-test/en/">Mouse Polling Rate Test</a></li>
+                            <li><a title="Anger Test / Anger Issues Test" href="https://www.arealme.com/anger-test/en/">Anger Test</a></li>
+                            <li><a title="Soldier Poet King Quiz - Are you a Soldier, a Poet? Or What Percentage of Each?" href="https://www.arealme.com/soldier-poet-king-quiz/en/">Soldier Poet King Quiz</a></li>
+                            <li><a title="Spacebar Clicker / Try to score 100M in one hour!" href="https://www.arealme.com/spacebar-clicker/en/">Spacebar Clicker</a></li>
+                        </ul>
+                    </div>
+                    <div class="arm_top_nav_card">
+                        <h2>Popular Series</h2>
+                        <ul>
+                            <li><a title="Harry Potter" href="https://www.arealme.com/category/harry-potter-quizzes/en">Harry Potter</a></li>
+                            <li><a title="Anime & Manga" href="https://www.arealme.com/category/anime-and-manga/en">Anime & Manga</a></li>
+                            <li><a title="Geography" href="https://www.arealme.com/category/geography/en">Geography</a></li>
+                            <li><a title="TV & Movies" href="https://www.arealme.com/category/tv-movies-and-books/en">TV & Movies</a></li>
+                            <li><a title="Personality & Self" href="https://www.arealme.com/category/personality-and-self/en">Personality & Self</a></li>
+                            <li><a title="Relationship" href="https://www.arealme.com/category/relationships/en">Relationship</a></li>
+                            <li><a title="Knowledge" href="https://www.arealme.com/category/knowledge/en">Knowledge</a></li>
+                            <li><a title="Human Abilities" href="https://www.arealme.com/category/ability-tests/en">Human Abilities</a></li>
+                        </ul>
+                    </div>
+                    <div class="arm_top_nav_card">
+                        <h2>Wordle Game and Solver</h2>
+                        <ul>
+                            <li><a title="Wordle Unlimited" href="https://mywordle.org/">🟩 Wordle Unlimited</a></li>
+                            <li><a title="Wordle Solver" href="https://wordlesolver.pro/">🟩 Wordle Solver</a></li>
+                        </ul>
+                    </div>
+                    <div class="arm_top_nav_card">
+                        <h2>About</h2>
+                        <ul>
+                            <li><a title="Privacy" href="https://www.arealme.com/privacy/">Privacy</a></li>
+                            <li><a title="TOS" href="https://www.arealme.com/tos/">TOS</a></li>
+                            <li><a title="Facebook (@arealme)" href="https://www.facebook.com/arealme">Facebook</a></li>
+                            <li><a title="Twitter (@arealme_com)" href="https://x.com/arealme_com">Twitter</a></li>
+                            <li><a title="Linktree (@arealme)" href="https://linktr.ee/arealme">Linktree</a></li>
+                            <li><a title="Contact US" href="https://www.arealme.com/contactus/">Contact US</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mybar_virgin" id="arm_topnav_mycontent">
+                <div class="mybar-loading blink_me">...</div>
+                <div class="arm_mybar_utils mybar-unload">
+                    <div id="mybar_title"></div>
+                    <div id="mybar_flush"></div>
+                </div>
+                <div class="arm_mybar_list mybar-unload"></div>
+            </div>
+        </div>
+    </nav>
+    <script>
+        window.mh_arr = window.mh_arr || [], window.mh_arr.push((function() {
+            var a = !0,
+                o = !0,
+                r = !1;
+
+            function e(r = !0) {
+                var e = $("#arm_topnav_open"),
+                    t = $("#nav-overlay, #arm_topnav_sidebar, #arm_topnav_close");
+                r ? (o || n(!1), t.show(), e.hide()) : (t.hide(), e.show()), a = !r
+            }
+
+            function n(n = !0) {
+                var t = $("#arm_mybar_open"),
+                    l = $("#nav-overlay, #arm_topnav_mycontent, #arm_mybar_close");
+                n ? (a || e(!1), l.show(), t.hide(), r || aload("https://www.arealme.com/static/mybar.js", (function() {
+                    $(".mybar-loading").remove(), $(".mybar-unload").removeClass("mybar-unload")
+                })), r = !0) : (l.hide(), t.show()), o = !n
+            }
+            if ($("#arm_topnav_toggle").on("touchstart click", (function(o) {
+                    o.preventDefault(), e(a)
+                })), $("#arm_topnav_mybar").on("touchstart click", (function(a) {
+                    a.preventDefault(), n(o)
+                })), $("#nav-overlay").click((function() {
+                    e(!1), n(!1)
+                })), $(".category_label").length > 0) {
+                var t = $(".category_label")[0].outerHTML.replace("category_label", "nav-category");
+                $("#arm_topnav_home").after('<svg class="breadcrumb-sep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.4 12"><path fill="#999" fill-rule="nonzero" d="M0 1.4 4.6 6 0 10.6 1.4 12l6-6-6-6z"/></svg>' + t)
+            }
+            $("#arm_topnav_outwrap").css("visibility", "visible")
+        }))
+    </script>
+    <div id="progress" style="visibility:hidden;background:#999;height:2px;padding:0;margin:0;position:relative">
+        <div id="progress-bg" style="background:linear-gradient(to right,#17aacc,#51519f);width:100%;transform:scaleX(0);height:2px;position:absolute;transition:transform .2s ease-out;transform-origin:left"></div>
+    </div>
+    <div class="leader_ad_banner"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4502790166243588" data-ad-slot="4603787661"></ins></div>
+    <div id="splash">
+        <article class="hint">
+            <h1>Alignment Test / Moral Alignment Test</h1>
+            <h2>Discover Your D&amp;D Alignment Type / Personalized Alignment Chart Now!</h2>
+            <p>This <em>moral alignment quiz</em> is masterfully crafted to unveil your unique <i>moral</i> and <i>ethical</i> orientation, offering cool animations and awesome visualizations of your alignment spectrum. Segmented into six essential categories,
+                including <i>Family</i>, <i>Friendship</i>, <i>Community</i>, <i>Political Views</i>, <i>Money</i>, and <i>Laws</i>, our online quiz will assign you one of the nine D&D alignments through a series of carefully designed questions.</p>
+            <p>Whether you’re a seasoned D&D player or exploring alignment for the first time, our quiz provides an engaging and visually stunning experience. Take a few minutes to dive into this fascinating world, and discover insightful revelations about
+                yourself today!</p>
+            <div class="lib-unld" id="start0"><button class="progress-button pure-button pure-button-primary" id="start"><span class="content">Start</span><span class="progress"><span id="progress-inner"></span></span></button></div>
+            <div class="clever-core-ads"></div>
+            <div class="lowerad"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4502790166243588" data-ad-slot="8771410920"></ins></div>
+        </article>
+        <article id="tips_extra">
+            <div class="subtip submain">
+                <h2 class="extra-full">Frequently Asked Questions</h2>
+                <h3>What is an alignment test?</h3>
+                <p>An alignment test is a quiz or assessment designed to determine a person’s moral and ethical outlook, as defined by the nine alignments in Dungeons & Dragons.</p>
+                <p>The <em>Alignment Test</em>, also known as the <em>D&D Alignment Test</em> or the <em>Moral Alignment Test</em>, is a single test that goes by multiple names.</p>
+                <h3>How do the alignments work?</h3>
+                <p>Alignment in <em>Dungeons & Dragons</em> is typically represented by a two-word phrase such as <em>Lawful Good</em>, <em>Neutral Evil</em> or <em>Chaotic Neutral</em>.</p>
+                <p>The first word of the phrase indicates the character’s ethics, reflecting their stance towards society and authority. It represents whether they value order and hierarchy or individuality and freedom.</p>
+                <p>The second word of the phrase describes the character’s morals, indicating whether they prioritize helping or harming others. It reflects their willingness to protect or harm people, and whether their actions are motivated by altruism
+                    or malevolence.</p>
+                <h3>What is Dungeons & Dragons?</h3>
+                <p>Dungeons & Dragons is a tabletop RPG created by <i>Gary Gygax</i> and <i>Dave Arneson</i> and published in 1974. In the game, players create characters and embark on adventures in a fantasy world. The game is guided by a Dungeon Master
+                    (DM) who narrates the story and controls non-player characters and monsters. Players use dice to determine the outcomes of their actions, while their characters gain experience and develop abilities over time. D&D is known for its
+                    immersive storytelling, complex rules, and emphasis on creativity and collaboration.</p>
+                <h3>Can I take the test without any knowledge of DnD games?</h3>
+                <p>Yes, you can take the alignment test without any prior knowledge of D&D games. Our instructions for each alignment type are comprehensive and use straightforward language and examples, so anyone can understand their results, regardless
+                    of their level of experience with the game.</p>
+                <h3>Why should I take the alignment test?</h3>
+                <p>An alignment test can offer a <b>deeper understanding of your moral and ethical beliefs</b>, as well as your <b>decision-making style</b> and <b>core values</b>. By identifying which of the nine D&D alignments you fall into, the test can
+                    provide insights into your <b>personality traits</b>, <b>strengths</b>, and <b>weaknesses</b>. This self-knowledge can be valuable in personal growth and can help you make decisions that align with your true self. As a result, taking
+                    an alignment test can be a fun and engaging way to learn more about yourself and your unique perspective on the world.</p>
+                <h3>What is the difference between “ethical” and “moral” ?</h3>
+                <p><em>“Moral”</em> refers to principles of right and wrong based on a particular belief system or cultural context. In contrast, <em>“ethical”</em> refers to principles of right and wrong based on a broader sense of fairness and justice,
+                    often universal across cultures and belief systems. Moral principles guide behavior in a given society, while ethical principles apply across different contexts and focus on concepts like honesty, integrity, and respect for others.</p>
+                <p>A defense lawyer is a good example of distinguishing between these two terms. Defense lawyers have their own personal moral code, which prompts them to believe that killing is an immoral and reprehensible act. However, another moral code,
+                    legal ethics, requires them to do everything in their power to defend the accused, even if they believe that the defendant is guilty and that their release may pose a greater danger to society. In this case, legal ethics must transcend
+                    personal moral beliefs in order to better uphold a judicial system that can provide fair judgments for defendants.</p>
+            </div>
+            <div class="subtip submain">
+                <table id="alignment-chart" class="extra-full extra-hv">
+                    <caption>Alignment Chart</caption>
+                    <tbody>
+                        <tr>
+                            <th>
+                                <div>Law vs Chaos (Ethical)</div>
+                                <div>Good vs Evil (Moral)</div>
+                            </th>
+                            <th scope="col">Lawful</th>
+                            <th scope="col">Neutral</th>
+                            <th scope="col">Chaotic</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Good</th>
+                            <td>Lawful good</td>
+                            <td>Neutral good</td>
+                            <td>Chaotic good</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Neutral</th>
+                            <td>Lawful neutral</td>
+                            <td>(True) neutral</td>
+                            <td>Chaotic neutral</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Evil</th>
+                            <td>Lawful evil</td>
+                            <td>Neutral evil</td>
+                            <td>Chaotic evil</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="subtip">
+                <h3>Demographics / Overall</h3><svg xmlns="http://www.w3.org/2000/svg" id="alignment_skeleton" class="dda-demo" viewBox="0 0 900 900"><g fill="none"><path fill="#C11" d="M599 599h300v300H599z" /><path fill="#A88" d="M301 599h300v300H301z" /><path fill="#A8D" d="M0 599h300v300H0z" /><path fill="#FBD" d="M599 301h300v300H599z" /><path fill="#6B5" d="M301 301h301v301H301z" /><path fill="#DDD" d="M0 301h300v300H0z" /><path fill="#F73" d="M599 0h300v300H599z" /><path fill="#FD6" d="M301 0h300v300H301z" /><path fill="#5BE" d="M0 0h300v300H0z" /><path stroke="#000" stroke-width="6" d="M0 300h900M0 600h900M300 0v900M600 0v900M3 3h894v894H3z" /><text fill="#000" x="150" y="150">21%</text><text fill="#000" x="450" y="150">29%</text><text fill="#000" x="750" y="150">8%</text><text fill="#000" x="150" y="450">6%</text><text fill="#000" x="450" y="450">13%</text><text fill="#000" x="750" y="450">11%</text><text fill="#000" x="150" y="750">&lt;1%</text><text fill="#000" x="450" y="750">1%</text><text fill="#000" x="750" y="750">1%</text></g></svg></div>
+            <div class="subtip">
+                <h3>Demographics / Age and Gender</h3><svg xmlns="http://www.w3.org/2000/svg" class="dda-demo-2" viewBox="0 0 1363 995"><rect fill="#FFA600" x="345" y="122" width="110" height="50"></rect><rect fill="#A05195" x="455" y="122" width="490" height="50"></rect><rect fill="#D45087" x="945" y="122" width="250" height="50"></rect><rect fill="#F95D6A" x="1195" y="122" width="140" height="50"></rect><rect fill="#8BD967" x="1335" y="122" width="10" height="50"></rect><rect fill="#FFA600" x="345" y="179" width="100" height="50"></rect><rect fill="#A05195" x="445" y="179" width="430" height="50"></rect><rect fill="#D45087" x="875" y="179" width="250" height="50"></rect><rect fill="#F95D6A" x="1125" y="179" width="200" height="50"></rect><rect fill="#8BD967" x="1325" y="179" width="20" height="50"></rect><rect fill="#FFA600" x="345" y="237" width="60" height="50"></rect><rect fill="#A05195" x="405" y="237" width="430" height="50"></rect><rect fill="#D45087" x="835" y="237" width="250" height="50"></rect><rect fill="#F95D6A" x="1085" y="237" width="240" height="50"></rect><rect fill="#8BD967" x="1325" y="237" width="20" height="50"></rect><rect fill="#FFA600" x="345" y="294" width="70" height="50"></rect><rect fill="#A05195" x="415" y="294" width="350" height="50"></rect><rect fill="#D45087" x="765" y="294" width="290" height="50"></rect><rect fill="#F95D6A" x="1055" y="294" width="270" height="50"></rect><rect fill="#8BD967" x="1325" y="294" width="20" height="50"></rect><rect fill="#FFA600" x="345" y="352" width="30" height="50"></rect><rect fill="#A05195" x="375" y="352" width="300" height="50"></rect><rect fill="#D45087" x="675" y="352" width="260" height="50"></rect><rect fill="#F95D6A" x="935" y="352" width="360" height="50"></rect><rect fill="#8BD967" x="1295" y="352" width="50" height="50"></rect><rect fill="#FFA600" x="345" y="409" width="40" height="50"></rect><rect fill="#A05195" x="385" y="409" width="250" height="50"></rect><rect fill="#D45087" x="635" y="409" width="280" height="50"></rect><rect fill="#F95D6A" x="915" y="409" width="390" height="50"></rect><rect fill="#8BD967" x="1305" y="409" width="40" height="50"></rect><rect fill="#4267B2" x="345" y="621" width="620" height="50"></rect><rect fill="#FFC0CB" x="965" y="621" width="380" height="50"></rect><rect fill="#4267B2" x="345" y="681" width="580" height="50"></rect><rect fill="#FFC0CB" x="925" y="681" width="420" height="50"></rect><rect fill="#4267B2" x="345" y="741" width="510" height="50"></rect><rect fill="#FFC0CB" x="855" y="741" width="490" height="50"></rect><rect fill="#4267B2" x="345" y="801" width="480" height="50"></rect><rect fill="#FFC0CB" x="825" y="801" width="520" height="50"></rect><rect fill="#4267B2" x="345" y="861" width="470" height="50"></rect><rect fill="#FFC0CB" x="815" y="861" width="530" height="50"></rect><rect fill="#4267B2" x="345" y="921" width="450" height="50"></rect><rect fill="#FFC0CB" x="795" y="921" width="550" height="50"></rect><rect fill="#FFA600" x="211" y="39" width="39" height="39"></rect><rect fill="#A05195" x="435" y="39" width="39" height="39"></rect><rect fill="#D45087" x="657" y="39" width="39" height="39"></rect><rect fill="#F95D6A" x="820" y="39" width="39" height="39"></rect><rect fill="#8BD967" x="1094" y="39" width="39" height="39"></rect><rect fill="#4267B2" x="541" y="538" width="39" height="39"></rect><rect fill="#FFC0CB" x="713" y="538" width="39" height="39"></rect><text class="snap-right" fill="#777777" x="326" y="142">Chaotic Neutral</text><text class="snap-right" fill="#777777" x="326" y="201">True Neutral</text><text class="snap-right" fill="#777777" x="326" y="259">Lawful Neutral</text><text class="snap-right" fill="#777777" x="326" y="318">Chaotic Good</text><text class="snap-right" fill="#777777" x="326" y="376">Lawful Good</text><text class="snap-right" fill="#777777" x="326" y="435">Neutral Good</text><text class="snap-right" fill="#777777" x="327" y="644">Chaotic Neutral</text><text class="snap-right" fill="#777777" x="327" y="704">True Neutral</text><text class="snap-right" fill="#777777" x="327" y="763">Lawful Neutral</text><text class="snap-right" fill="#777777" x="327" y="823">Chaotic Good</text><text class="snap-right" fill="#777777" x="327" y="882">Lawful Good</text><text class="snap-right" fill="#777777" x="327" y="942">Neutral Good</text><text fill="#000000" x="375" y="148">11</text><text fill="#FFFFFF" x="638" y="148">49</text><text fill="#FFFFFF" x="1029" y="146">25</text><text fill="#FFFFFF" x="1258" y="148">14</text><text fill="#000000" x="368" y="204">10</text><text fill="#FFFFFF" x="614" y="204">43</text><text fill="#FFFFFF" x="972" y="204">25</text><text fill="#FFFFFF" x="1183" y="204">20</text><text fill="#000000" x="367" y="261">6</text><text fill="#FFFFFF" x="539" y="261">43</text><text fill="#FFFFFF" x="944" y="261">25</text><text fill="#FFFFFF" x="1158" y="261">24</text><text fill="#000000" x="368" y="318">7</text><text fill="#FFFFFF" x="519" y="318">35</text><text fill="#FFFFFF" x="862" y="318">29</text><text fill="#FFFFFF" x="1162" y="318">27</text><text fill="#FFFFFF" x="492" y="376">30</text><text fill="#FFFFFF" x="767" y="376">26</text><text fill="#FFFFFF" x="1077" y="376">36</text><text fill="#000000" x="1311" y="376">5</text><text fill="#000000" x="355" y="433">4</text><text fill="#FFFFFF" x="500" y="433">25</text><text fill="#FFFFFF" x="716" y="433">28</text><text fill="#FFFFFF" x="1051" y="433">39</text><text fill="#000000" x="1316" y="433">4</text><text fill="#FFFFFF" x="354" y="645">62</text><text fill="#FFFFFF" x="354" y="705">58</text><text fill="#000000" x="945" y="704">42</text><text fill="#000000" x="975" y="644">38</text><text fill="#FFFFFF" x="354" y="766">51</text><text fill="#FFFFFF" x="354" y="825">48</text><text fill="#FFFFFF" x="354" y="885">47</text><text fill="#FFFFFF" x="354" y="945">45</text><text fill="#000000" x="805" y="946">55</text><text fill="#000000" x="821" y="886">53</text><text fill="#000000" x="838" y="826">52</text><text fill="#000000" x="866" y="765">49</text><text class="dda-tsmall" x="263" y="59">Adult Gen Z</text><text class="dda-tsmall" x="487" y="59">Millennials</text><text class="dda-tsmall" x="709" y="59">Gen X</text><text class="dda-tsmall" x="872" y="59">Baby Boomers</text><text class="dda-tsmall" x="1145" y="59">Earlier</text><text class="dda-tsmall" x="592" y="560">Male</text><text class="dda-tsmall" x="766" y="560">Female</text></svg>
+                <div style="line-break:anywhere;font-size:.7em;color:#999">
+                    <h5 style="margin-bottom:0">References</h5>
+                    <li>https://today.yougov.com/topics/society/articles-reports/2022/06/10/dungeons-and-dragons-americans-are-most-likely-be-</li>
+                    <li>https://www.reddit.com/r/polls/comments/14t1515/what_is_your_dd_alignment_style/</li>
+                </div>
+            </div>
+            <div class="subtip submain">
+                <div class="dda-section dda-section-0">
+                    <h2 class="extra-full">Lawful Good:</h2>
+                    <h4>Archetype: Crusader</h4>
+                    <p>As a Lawful Good character, you strive to uphold justice, virtue, and order in the world. You believe in the power of well-organized systems and institutions to create a harmonious and prosperous society. This means you are dedicated
+                        to following the rules and regulations that govern your community, and you always act with honesty and integrity.</p>
+                    <p>Your strong moral compass guides your actions, and you seek to make the world a better place by helping others and eliminating evil. You protect the innocent, assist the needy, and stand up against oppression and tyranny. As a champion
+                        of righteousness, you are often seen as a shining example of goodness and a beacon of hope in a dark world.</p>
+                    <p>You respect authority and tradition, and you may be drawn to roles such as paladin, cleric, or knight, where your devotion to righteousness is most evident. In your relationships, you are loyal, trustworthy, and compassionate, making
+                        you a reliable ally and a steadfast friend.</p>
+                    <h5 class="dda-pros">Pros:</h5>
+                    <p>Lawful Good characters are often seen as heroic and noble, and they can inspire others to do the right thing. They are often respected and admired by those around them.</p>
+                    <h5 class="dda-cons">Cons:</h5>
+                    <p>Lawful Good characters can sometimes be rigid or inflexible, refusing to consider alternative viewpoints or approaches. They may also be seen as self-righteous or preachy.</p>
+                    <h5 class="dda-rep">Representative characters:</h5>
+                    <ul>
+                        <li>Captain America (Marvel Comics)</li>
+                        <li>Aragorn (The Lord of the Rings)</li>
+                        <li>Wonder Woman (DC Comics)</li>
+                    </ul>
+                </div>
+                <div class="dda-section dda-section-1">
+                    <h2 class="extra-full">Neutral Good:</h2>
+                    <h4>Archetype: Benefactor</h4>
+                    <p>As a Neutral Good character, your primary motivation is to do good and help others, regardless of the rules and regulations of society. While you don't actively seek to disrupt the established order, you are willing to bend or break
+                        the rules if it means achieving a greater good. Your primary focus is on the well-being of others, and you act with compassion, kindness, and selflessness.</p>
+                    <p>Your moral compass is not tied to any strict code of conduct, but rather to your strong sense of empathy and an innate desire to make the world a better place. As a result, your actions can sometimes be unpredictable and situational,
+                        as you adapt your behavior to each unique circumstance.</p>
+                    <p>You may be drawn to roles such as healer, ranger, or druid, where your ability to navigate the complexities of morality and balance your actions with wisdom is most evident. In your relationships, you are caring, understanding, and
+                        supportive, making you a valued friend and ally.</p>
+                    <h5 class="dda-pros">Pros:</h5>
+                    <p>Neutral Good characters are often seen as compassionate and caring, and they are willing to take risks to help others. They are often well-liked and respected.</p>
+                    <h5 class="dda-cons">Cons:</h5>
+                    <p>Neutral Good characters may struggle with making difficult decisions, as they may prioritize helping others over their own self-interest. They may also be seen as naive or overly idealistic.</p>
+                    <h5 class="dda-rep">Representative characters:</h5>
+                    <ul>
+                        <li>Harry Potter (Harry Potter series)</li>
+                        <li>Spider-Man (Marvel Comics)</li>
+                        <li>Luke Skywalker (Star Wars)</li>
+                        <li>Frodo Baggins (The Lord of the Rings)</li>
+                    </ul>
+                </div>
+                <div class="dda-section dda-section-2">
+                    <h2 class="extra-full">Chaotic Good:</h2>
+                    <h4>Archetype: Rebel</h4>
+                    <p>As a Chaotic Good character, you are driven by a strong sense of individualism, freedom, and personal responsibility. You believe that people should be free to choose their own paths in life and are wary of oppressive systems and laws
+                        that restrict this freedom. As a result, you frequently challenge the status quo and are unafraid to break the rules in order to do what is right.</p>
+                    <p>While your intentions are noble and your heart is in the right place, your methods can sometimes be unorthodox and even reckless. Your actions may cause friction with more law-abiding characters, but your ultimate goal is always to
+                        protect the innocent and fight against evil.</p>
+                    <p>You might be drawn to roles such as bard, rogue, or sorcerer, where your creativity, adaptability, and refusal to be bound by convention are most evident. In your relationships, you are fiercely loyal, passionate, and willing to go
+                        to great lengths to help those you care about.</p>
+                    <h5 class="dda-pros">Pros:</h5>
+                    <p>Chaotic Good characters are often seen as rebels or outsiders, and they can inspire others to challenge the status quo. They are often viewed as passionate and courageous.</p>
+                    <h5 class="dda-cons">Cons:</h5>
+                    <p>Chaotic Good characters can sometimes be unpredictable or reckless, putting themselves and others in danger. They may also be seen as selfish or short-sighted.</p>
+                    <h5 class="dda-rep">Representative characters:</h5>
+                    <ul>
+                        <li>Robin Hood (Robin Hood folklore)</li>
+                        <li>Han Solo (Star Wars)</li>
+                        <li>The Doctor (Doctor Who)</li>
+                        <li>Katniss Everdeen (The Hunger Games)</li>
+                    </ul>
+                </div>
+                <div class="dda-section dda-section-3">
+                    <h2 class="extra-full">Lawful Neutral:</h2>
+                    <h4>Archetype: Judge</h4>
+                    <p>As a Lawful Neutral character, you are committed to upholding the rules, traditions, and institutions that govern society. You believe in the importance of order and structure and view these as necessary for maintaining stability and
+                        preventing chaos. Your actions are guided by a strict code of conduct, which you follow without bias or favoritism.</p>
+                    <p>Your dedication to the law makes you an impartial arbiter, and you strive to ensure that justice is served fairly and consistently, regardless of personal feelings or relationships. You recognize that the world is not black and white,
+                        and you navigate the gray areas with reason and pragmatism.</p>
+                    <p>Roles such as judge, inquisitor, or monk might be well-suited to your disciplined and methodical nature. In your relationships, you are reliable, consistent, and fair, making you a trusted ally and an honest broker in disputes.</p>
+                    <h5 class="dda-pros">Pros:</h5>
+                    <p>Lawful Neutral characters are often seen as reliable and trustworthy, and they can be counted on to follow through on their commitments. They are often respected by those around them.</p>
+                    <h5 class="dda-cons">Cons:</h5>
+                    <p>Lawful Neutral characters may struggle with making difficult moral decisions, as they may prioritize following orders or maintaining the status quo over doing what is right. They may also be seen as rigid or inflexible.</p>
+                    <h5 class="dda-rep">Representative characters:</h5>
+                    <ul>
+                        <li>Judge Dredd (Judge Dredd comics)</li>
+                        <li>Robocop (Robocop)</li>
+                        <li>Rorschach (Watchmen)</li>
+                        <li>Mr. Spock (Star Trek)</li>
+                    </ul>
+                </div>
+                <div class="dda-section dda-section-4">
+                    <h2 class="extra-full">True Neutral:</h2>
+                    <h4>Archetype: Undecided</h4>
+                    <p>As a True Neutral character, you are a pragmatist who seeks balance and harmony in all things. You strive to maintain equilibrium in the world, avoiding extremes of good and evil, law and chaos. With a strong sense of self-preservation
+                        and a desire to avoid unnecessary conflict, you act with caution and restraint, carefully weighing the consequences of your actions.</p>
+                    <p>Your primary concern is your own well-being and that of your immediate circle, but you are not necessarily selfish or uncaring. You simply do not see the world in terms of rigid moral absolutes, and you are willing to adapt your behavior
+                        based on the situation at hand.</p>
+                    <p>You may be drawn to roles such as druid, ranger, or merchant, where your ability to navigate the complexities of morality and balance the needs of various factions is most evident. In your relationships, you are pragmatic, adaptable,
+                        and resourceful, making you a valuable and dependable ally.</p>
+                    <h5 class="dda-pros">Pros:</h5>
+                    <p>True Neutral characters are often seen as wise and balanced, and they can provide a stabilizing influence in a group or community. They are often respected for their impartiality.</p>
+                    <h5 class="dda-cons">Cons:</h5>
+                    <p>True Neutral characters may struggle with making decisions, as they may prioritize maintaining balance over taking action. They may also be seen as indecisive or detached.</p>
+                    <h5 class="dda-rep">Representative characters:</h5>
+                    <ul>
+                        <li>Dr. Manhattan (Watchmen)</li>
+                        <li>Q (Star Trek)</li>
+                        <li>Death (The Sandman)</li>
+                        <li>The Man With No Name (The Good, the Bad and the Ugly)</li>
+                    </ul>
+                </div>
+                <div class="dda-section dda-section-5">
+                    <h2 class="extra-full">Chaotic Neutral:</h2>
+                    <h4>Archetype: Free spirit</h4>
+                    <p>As a Chaotic Neutral character, you are a free spirit who values individualism, personal freedom, and self-expression above all else. You are guided by your own whims and desires, often acting impulsively and without regard for societal
+                        norms or conventions. Your actions can be unpredictable and may sometimes seem contradictory, as you follow your heart and instincts ratherthan any rigid code of conduct.</p>
+                    <p>While you don't actively seek to harm others, you are not particularly concerned with their well-being either. You prioritize your own interests and are willing to bend or break the rules to achieve your goals. Your chaotic nature
+                        can sometimes lead to unintended consequences or collateral damage, but you are not inherently malicious or evil.</p>
+                    <p>Roles such as rogue, bard, or sorcerer might suit your independent and unconventional spirit. In your relationships, you are charismatic, adventurous, and often surprising, making you an exciting and unpredictable ally or companion.</p>
+                    <h5 class="dda-pros">Pros:</h5>
+                    <p>Chaotic Neutral characters are often seen as free spirits and rebels, and they can inspire others to question authority. They are often viewed as creative and innovative.</p>
+                    <h5 class="dda-cons">Cons:</h5>
+                    <p>Chaotic Neutral characters can sometimes be unpredictable or even dangerous, as they may prioritize their own desires over the safety of others. They may also be seen as selfish or irresponsible.</p>
+                    <h5 class="dda-rep">Representative characters:</h5>
+                    <ul>
+                        <li>Captain Jack Sparrow (Pirates of the Caribbean)</li>
+                        <li>Deadpool (Marvel Comics)</li>
+                        <li>Harley Quinn (DC Comics)</li>
+                        <li>Loki (Marvel Comics)</li>
+                    </ul>
+                </div>
+                <div class="dda-section dda-section-6">
+                    <h2 class="extra-full">Lawful Evil:</h2>
+                    <h4>Archetype: Dominator</h4>
+                    <p>As a Lawful Evil character, you are a master manipulator who seeks to control and dominate others through cunning, deception, and exploitation. You understand the value of order and hierarchy, and you use the rules and institutions
+                        of society to advance your own power and influence. Your actions are guided by a strict personal code, which you follow ruthlessly and without remorse.</p>
+                    <p>While you are capable of great cruelty, your evil is often cold and calculated, rather than wanton or sadistic. You are a patient and disciplined strategist, always looking for opportunities to further your own interests and undermine
+                        your enemies. Your ultimate goal is to rise to a position of power and authority, where you can bend the world to your will.</p>
+                    <p>Roles such as warlock, necromancer, or aristocrat might be well-suited to your ambitious and Machiavellian nature. In your relationships, you are cunning, resourceful, and utterly ruthless, making you a dangerous and formidable adversary.</p>
+                    <h5 class="dda-pros">Pros:</h5>
+                    <p>Lawful Evil characters are often seen as cunning and strategic, and they can be effective leaders or negotiators. They may also be respected for their discipline and dedication.</p>
+                    <h5 class="dda-cons">Cons:</h5>
+                    <p>Lawful Evil characters can be ruthless and calculating, putting their own interests ahead of others. They may also be seen as cold or heartless.</p>
+                    <h5 class="dda-rep">Representative characters:</h5>
+                    <ul>
+                        <li>Darth Vader (Star Wars)</li>
+                        <li>Ra's al Ghul (DC Comics)</li>
+                        <li>Sauron (The Lord of the Rings)</li>
+                        <li>Tywin Lannister (Game of Thrones)</li>
+                    </ul>
+                </div>
+                <div class="dda-section dda-section-7">
+                    <h2 class="extra-full">Neutral Evil:</h2>
+                    <h4>Archetype: Malefactor</h4>
+                    <p>As a Neutral Evil character, you are driven by a singular desire for personal gain, power, and pleasure. You have no qualms about betraying, manipulating, or harming others to achieve your ends, and you are not bound by any code of
+                        conduct or loyalty. Your actions are guided by pure self-interest, and you are willing to do whatever it takes to get what you want.</p>
+                    <p>Your evil is pragmatic and opportunistic, and you are adept at exploiting the weaknesses and vulnerabilities of others. While you may occasionally work with others or form temporary alliances, these relationships are always transactional
+                        and easily discarded when they no longer serve your purposes.</p>
+                    <p>You may be drawn to roles such as assassin, thief, or mercenary, where your ruthless ambition and lack of scruples are most evident. In your relationships, you are cunning, treacherous, and utterly self-serving, making you a dangerous
+                        and unpredictable ally or enemy.</p>
+                    <h5 class="dda-pros">Pros:</h5>
+                    <p>Neutral Evil characters can be effective at achieving their goals, as they are willing to do whatever it takes to get ahead. They may also be seen as charming or persuasive.</p>
+                    <h5 class="dda-cons">Cons:</h5>
+                    <p>Neutral Evil characters can be selfish and manipulative, putting their own interests ahead of others. They may also be seen as untrustworthy or deceitful.</p>
+                    <h5 class="dda-rep">Representative characters:</h5>
+                    <ul>
+                        <li>Magneto (X-Men)</li>
+                        <li>Voldemort (Harry Potter series)</li>
+                        <li>Hannibal Lecter (The Silence of the Lambs)</li>
+                        <li>Maleficent (Sleeping Beauty)</li>
+                    </ul>
+                </div>
+                <div class="dda-section dda-section-8">
+                    <h2 class="extra-full">Chaotic Evil:</h2>
+                    <h4>Archetype: Destroyer</h4>
+                    <p>Characters who are Chaotic Evil are driven by a desire to cause chaos and destruction. They value personal power and often work to sow discord and confusion.</p>
+                    <p>As a Chaotic Evil character, you are a force of destruction and chaos, driven by a desire to spread suffering, fear, and anarchy. You revel in your own wickedness and delight in the pain and misery of others. Your actions are guided
+                        by a sadistic and malicious nature, and you take pleasure in breaking the rules, defying authority, and sowing discord.</p>
+                    <p>Your evil is wild and unpredictable, and you often act on impulse, without concern for the consequences of your actions. You are a volatile and dangerous individual, capable of great cruelty and wanton destruction. Those who cross
+                        your path do so at their own peril, as you are a relentless and merciless adversary.</p>
+                    <p>Roles such as barbarian, warlord, or cultist might suit your chaotic and destructive nature. In your relationships, you are cruel, capricious, and utterly terrifying, making you a fearsome and unpredictable foe.</p>
+                    <h5 class="dda-pros">Pros:</h5>
+                    <p>Chaotic Evil characters can be effective at causing chaos or destruction, and they may be able to take advantage of others’ weaknesses. They may also be seen as charismatic or persuasive.</p>
+                    <h5 class="dda-cons">Cons:</h5>
+                    <p>Chaotic Evil characters can be unpredictable and dangerous, putting themselves and others at risk. They may also be seen as cruel or sadistic.</p>
+                    <h5 class="dda-rep">Representative characters:</h5>
+                    <ul>
+                        <li>The Joker (Batman)</li>
+                        <li>Freddy Krueger (A Nightmare on Elm Street)</li>
+                        <li>Joffrey Baratheon (Game of Thrones)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="subtip submain">
+                <h2 class="extra-full">Celebrities Moral Alignment Chart:</h2>
+                <section id="cele-charts">
+                    <div class="cele-wrap">
+                        <h4>Harry Potter</h4>
+                        <h5>Harry Potter Series</h5>
+                        <div class="cele-chart" data="0.4,0.1"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Hannibal Lecter</h4>
+                        <h5>Silence of the Lambs</h5>
+                        <div class="cele-chart" data="0.4,0.8"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Goku</h4>
+                        <h5>Dragon Ball</h5>
+                        <div class="cele-chart" data="0.1,0.3"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Joker</h4>
+                        <h5>DC Comics</h5>
+                        <div class="cele-chart" data="0.9,0.9"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Captain America</h4>
+                        <h5>Marvel Comics</h5>
+                        <div class="cele-chart" data="0.1,0.1"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Tony Stark</h4>
+                        <h5>Marvel Comics</h5>
+                        <div class="cele-chart" data="0.9,0.1"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Frodo Baggins</h4>
+                        <h5>Lord of the Rings</h5>
+                        <div class="cele-chart" data="0.2,0.2"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Tywin Lannister</h4>
+                        <h5>Game of Thrones</h5>
+                        <div class="cele-chart" data="0.1,0.8"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Tyrion Lannister</h4>
+                        <h5>Game of Thrones</h5>
+                        <div class="cele-chart" data="0.4,0.2"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Walter White</h4>
+                        <h5>Breaking Bad</h5>
+                        <div class="cele-chart" data="0.3,0.6"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Hank Schrader</h4>
+                        <h5>Breaking Bad</h5>
+                        <div class="cele-chart" data="0.1,0.1"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Sherlock Holmes</h4>
+                        <h5>Sherlock</h5>
+                        <div class="cele-chart" data="0.4,0.8"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>John Wick</h4>
+                        <h5>John Wick Series</h5>
+                        <div class="cele-chart" data="0.5,0.5"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Lelouch Lamperouge</h4>
+                        <h5>Code Geass</h5>
+                        <div class="cele-chart" data="0.8,0.2"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Naruto Uzumaki</h4>
+                        <h5>Naruto</h5>
+                        <div class="cele-chart" data="0.7,0.2"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Light Yagami</h4>
+                        <h5>Death Note</h5>
+                        <div class="cele-chart" data="0.1,0.9"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Jack Sparrow</h4>
+                        <h5>Pirates of the Caribbean</h5>
+                        <div class="cele-chart" data="0.8,0.3"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Darth Vader</h4>
+                        <h5>Star Wars</h5>
+                        <div class="cele-chart" data="0.2,0.8"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Yoda</h4>
+                        <h5>Star Wars</h5>
+                        <div class="cele-chart" data="0.4,0.2"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Spider-Man</h4>
+                        <h5>Marvel Comics</h5>
+                        <div class="cele-chart" data="0.2,0.1"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Daenerys Targaryen</h4>
+                        <h5>Game of Thrones</h5>
+                        <div class="cele-chart" data="0.7,0.5"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Saitama</h4>
+                        <h5>One Punch Man</h5>
+                        <div class="cele-chart" data="0.2,0.4"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Arya Stark</h4>
+                        <h5>Game of Thrones</h5>
+                        <div class="cele-chart" data="0.7,0.3"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Gollum</h4>
+                        <h5>Lord of the Rings</h5>
+                        <div class="cele-chart" data="0.4,0.7"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Rick Sanchez</h4>
+                        <h5>Rick and Morty</h5>
+                        <div class="cele-chart" data="0.7,0.4"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Vegeta</h4>
+                        <h5>Dragon Ball</h5>
+                        <div class="cele-chart" data="0.2,0.6"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Thor</h4>
+                        <h5>Marvel Comics</h5>
+                        <div class="cele-chart" data="0.7,0.2"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Spike Spiegel</h4>
+                        <h5>Cowboy Bebop</h5>
+                        <div class="cele-chart" data="0.7,0.3"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Tommy Shelby</h4>
+                        <h5>Peaky Blinders</h5>
+                        <div class="cele-chart" data="0.6,0.2"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Michael Corleone</h4>
+                        <h5>The Godfather</h5>
+                        <div class="cele-chart" data="0.4,0.6"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Albus Dumbledore</h4>
+                        <h5>Harry Potter Series</h5>
+                        <div class="cele-chart" data="0.8,0.2"></div>
+                    </div>
+                    <div class="cele-wrap">
+                        <h4>Mikasa Ackerman</h4>
+                        <h5>Attack on Titan</h5>
+                        <div class="cele-chart" data="0.3,0.2"></div>
+                    </div>
+                </section>
+            </div>
+            <script>
+                window.rh_arr = window.rh_arr || [], rh_arr.push((function() {
+                    $("#tips_extra").insertAfter("#fast-wrap")
+                }))
+            </script>
+        </article>
+        <div class="tag-wrap"><a class="category_label" href="https://www.arealme.com/category/personality-and-self/en" title="Quizzes or tests designed to figure out certain personality traits, as well as tell you more about yourself">Personality and Self</a><a href="https://www.arealme.com/tag/alignment/en"
+                title="Explore your moral compass with our collection of quizzes about alignment. Discover your character's ethical outlook in tabletop role-playing games and learn about different moral and ethical systems across cultures.">Alignment</a>
+            <a
+                href="https://www.arealme.com/tag/archetype-test/en" title="A test to determine what archetype you are.">Archetype test</a><a href="https://www.arealme.com/tag/dungeons-dragons/en" title="Quizzes and interactive content about Dungeons &amp; Dragons.">Dungeons & Dragons</a></div>
+        <script>
+            window.rh_arr = window.rh_arr || [], rh_arr.push((function() {
+                $(".tag-wrap").insertAfter("#fast-wrap")
+            }))
+        </script>
+        <div id="homelink"><a id="arealme_home" target="_blank" href="https://www.arealme.com/" title="arealme English" onclick="g(&quot;/home/&quot;+location.href,!0)"><svg viewBox="0 0 427 427" width="18"><path d="M420.42,208.924l-192-192c-8.341-8.341-21.824-8.341-30.165,0l-192,192c-6.101,6.101-7.936,15.275-4.629,23.253 c3.285,7.979,11.093,13.163,19.712,13.163h42.667v170.667h106.667V309.34h85.333v106.667h106.667V245.34h42.667 c8.619,0,16.427-5.184,19.712-13.163C428.356,224.199,426.521,215.025,420.42,208.924z" fill="beige" /></svg>arealme.com</a>
+            <a id="qr_generator_web" target="_blank" title="Wordle Unlimited and Custom in English" href="https://mywordle.org/" onclick="g(&quot;/mywordle/&quot;+location.href,!0)"><svg width="22" viewBox="0 0 152 152"><circle cx="76" cy="76" fill="#fff" r="66"></circle><path fill="#6aaa64" d="M140 0H12A12 12 0 0 0 0 12v128a12 12 0 0 0 12 12h128a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12zm-33 116H87L76 70l-11 46H45L28 36h20l9 50 11-50h16l11 50 9-50h20z" /></svg>Wordle
+            Unlimited</a>
+        </div>
+        <div class="samelang_links_img"><a target="_blank" lang="en" hreflang="en" class="feature" href="/mental/en/" title="Mental Age Test"><img class="xpromo_img lazy_load" alt="Mental Age Test" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Mental Age Test</b></a>
+            <a target="_blank" lang="en" hreflang="en" class="feature" href="/career/en/" title="What Career Should You Have? (&#8220;What Job Should I Have&#8221;)"><img class="xpromo_img lazy_load" alt="What Career Should You Have? (“What Job Should I Have”)" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>What Career Should You Have? (“What Job Should I Have”)</b></a>
+            <a target="_blank" lang="en" hreflang="en" class="feature" href="/16types/en/" title="Vocational Personality Radar Test (Personality Type Test)"><img class="xpromo_img lazy_load" alt="Vocational Personality Radar Test (Personality Type Test)" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Vocational Personality Radar Test (Personality Type Test)</b></a>
+            <a target="_blank" lang="en" hreflang="en" class="feature" href="/left-right-brain/en/" title="Left Brain Right Brain Test"><img class="xpromo_img lazy_load" alt="Left Brain Right Brain Test" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Left Brain Right Brain Test</b></a>
+            <a
+                target="_blank" lang="en" hreflang="en" class="feature" href="/which-game-of-thrones-house-are-you-quiz/en/" title="Which Game Of Thrones House Are You From?"><img class="xpromo_img lazy_load" alt="Which Game Of Thrones House Are You From?" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Which Game Of Thrones House Are You From?</b></a>
+                <a target="_blank" lang="en" hreflang="en" class="feature" href="/sadist-or-masochist-personality-quiz/en/" title="BDSM Test: &#8220;Sadomasochism Tendency Test&#8221;"><img class="xpromo_img lazy_load" alt="BDSM Test: “Sadomasochism Tendency Test”" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>BDSM Test: “Sadomasochism Tendency Test”</b></a>
+                <a target="_blank" lang="en" hreflang="en" class="feature" href="/when-will-i-die/en/" title="When Will I Die?"><img class="xpromo_img lazy_load" alt="When Will I Die?" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>When Will I Die?</b></a>
+                <a
+                    target="_blank" lang="en" hreflang="en" class="feature" href="/country/en/" title="Where Should I Live (Since 2014 - Updated to 2024)"><img class="xpromo_img lazy_load" alt="Where Should I Live (Since 2014 - Updated to 2024)" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Where Should I Live (Since 2014 - Updated to 2024)</b></a>
+                    <a target="_blank" lang="en" hreflang="en" class="feature" href="/harry-potter-house-sort/en/" title="Harry Potter House Quiz - Which Hogwarts House Do You Belong In? Stats &#38; Insights updated in 2024"><img class="xpromo_img lazy_load" alt="Harry Potter House Quiz - Which Hogwarts House Do You Belong In? Stats & Insights updated in 2024" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>"
+                                /><b>Harry Potter House Quiz - Which Hogwarts House Do You Belong In? Stats & Insights updated in 2024</b></a><a target="_blank" lang="en" hreflang="en" class="feature" href="/oekaki-mental-age/en/"
+                        title="Draw Something To Discover Your Mental Age"><img class="xpromo_img lazy_load" alt="Draw Something To Discover Your Mental Age" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Draw Something To Discover Your Mental Age</b></a>
+                    <a target="_blank" lang="en" hreflang="en" class="feature" href="/click-speed-test/en/" title="CPS Test / CPS Tester"><img class="xpromo_img lazy_load" alt="CPS Test / CPS Tester" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>CPS Test / CPS Tester</b></a>
+                    <a
+                        target="_blank" lang="en" hreflang="en" class="feature" href="/typing-test/en/" title="Typing Test &#187; Error and Statistical Reports Now Available!"><img class="xpromo_img lazy_load" alt="Typing Test » Error and Statistical Reports Now Available!" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Typing Test » Error and Statistical Reports Now Available!</b></a>
+                        <a target="_blank" lang="en" hreflang="en" class="feature" href="/rice-purity-test/en/" title="Rice Purity Test"><img class="xpromo_img lazy_load" alt="Rice Purity Test" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Rice Purity Test</b></a>
+                        <a
+                            target="_blank" lang="en" hreflang="en" class="feature" href="/gay-test/en/" title="Gay Test - Am I Gay, Straight, or Bisexual? Take this quiz to find out now!"><img class="xpromo_img lazy_load" alt="Gay Test - Am I Gay, Straight, or Bisexual? Take this quiz to find out now!" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Gay Test - Am I Gay, Straight, or Bisexual? Take this quiz to find out now!</b></a>
+                            <a target="_blank" lang="en" hreflang="en" class="feature" href="/do-i-like-him/en/" title="Do I Like Him Quiz - Take this quiz to know do you have a crush on him"><img class="xpromo_img lazy_load" alt="Do I Like Him Quiz - Take this quiz to know do you have a crush on him" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>"
+                                            /><b>Do I Like Him Quiz - Take this quiz to know do you have a crush on him</b></a><a target="_blank" lang="en" hreflang="en" class="feature" href="/iq-2021/en/" title="the IQ Test 2021 (New Certificate for 2021)"><img class="xpromo_img lazy_load" alt="the IQ Test 2021 (New Certificate for 2021)" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>the IQ Test 2021 (New Certificate for 2021)</b></a>
+                            <a target="_blank" lang="en" hreflang="en" class="feature" href="/bmi-calculator/en/" title="BMI Calculator - Interactive BMI Chart, the BMI test you must take in 2024"><img class="xpromo_img lazy_load" alt="BMI Calculator - Interactive BMI Chart, the BMI test you must take in 2024" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>"
+                                                /><b>BMI Calculator - Interactive BMI Chart, the BMI test you must take in 2024</b></a><a target="_blank" lang="en" hreflang="en" class="feature" href="/indonesian-comprehensive-knowledge-test/en/"
+                                title="Ultimate Comprehensive Indonesia Trivia Quiz"><img class="xpromo_img lazy_load" alt="Ultimate Comprehensive Indonesia Trivia Quiz" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Ultimate Comprehensive Indonesia Trivia Quiz</b></a>
+                            <a target="_blank" lang="en" hreflang="en" class="feature" href="/aesthetic-quiz/en/" title="Aesthetic Quiz - What is my aesthetic?"><img class="xpromo_img lazy_load" alt="Aesthetic Quiz - What is my aesthetic?" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Aesthetic Quiz - What is my aesthetic?</b></a>
+                            <a target="_blank" lang="en" hreflang="en" class="feature" href="/taylor-swift-song-quiz/en/" title="&#127925; The Ultimate Taylor Swift Tune Test: Are You a True Swiftie? &#127925;"><img class="xpromo_img lazy_load" alt="🎵 The Ultimate Taylor Swift Tune Test: Are You a True Swiftie? 🎵" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>"
+                                                        /><b>🎵 The Ultimate Taylor Swift Tune Test: Are You a True Swiftie? 🎵</b></a><a target="_blank" lang="en" hreflang="en" href="/only-2-percent-of-adults-can-pass-this-elementary-test/en/"
+                                title="Elementary School General Knowledge Test - 98% of adults FAILED to pass this. Can you pass it?"><img class="xpromo_img lazy_load" alt="Elementary School General Knowledge Test - 98% of adults FAILED to pass this. Can you pass it?" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Elementary School General Knowledge Test - 98% of adults FAILED to pass this. Can you pass it?</b></a>
+                            <a target="_blank" lang="en" hreflang="en" href="/iq/en/" title="IQ Test (5M+ takers, completely free, no hassle, instant results)"><img class="xpromo_img lazy_load" alt="IQ Test (5M+ takers, completely free, no hassle, instant results)" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>"
+                                                            /><b>IQ Test (5M+ takers, completely free, no hassle, instant results)</b></a><a target="_blank" lang="en" hreflang="en" href="/colors/en/" title="Are you a color master?"><img class="xpromo_img lazy_load" alt="Are you a color master?" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>Are you a color master?</b></a>
+                            <a target="_blank" lang="en" hreflang="en" href="/match/en/" title="The Name Match Test"><img class="xpromo_img lazy_load" alt="The Name Match Test" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'></svg>" /><b>The Name Match Test</b></a>
+        </div>
+    </div>
+    <ul class="question_view" id="collection">
+        <li id="q1">
+            <div class="questionWrapper">
+                <div class="question">How do you feel about family gatherings?</div>
+                <div class="answer" value="U12">I cherish the time spent with family and always look forward to it.</div>
+                <div class="answer" value="L9">It’s important to maintain traditions and stay connected with relatives.</div>
+                <div class="answer" value="R6xD7">I prefer to keep my distance but will show up if I think there’s something to gain.</div>
+                <div class="answer" value="R14">I find them restrictive and prefer to spend my time elsewhere.</div>
+            </div>
+        </li>
+        <li id="q2">
+            <div class="questionWrapper">
+                <div class="question">Your sibling is struggling financially. What do you do?</div>
+                <div class="answer" value="U20">I offer them financial support and help them find ways to improve their situation.</div>
+                <div class="answer" value="L15">I recommend resources and support networks within the community.</div>
+                <div class="answer" value="R10xD11">I lend them money, but expect it back with interest.</div>
+                <div class="answer" value="R17">It’s their problem, not mine. They need to figure it out on their own.</div>
+            </div>
+        </li>
+        <li id="q3">
+            <div class="questionWrapper">
+                <div class="question">Your parents have a disagreement. How do you handle it?</div>
+                <div class="answer" value="U10">I try to mediate and find a solution that makes both parties happy.</div>
+                <div class="answer" value="L12">I encourage them to follow family rules and resolve the issue according to tradition.</div>
+                <div class="answer" value="D5xR8">I use the situation to my advantage and manipulate the outcome.</div>
+                <div class="answer" value="R15">I stay out of it and let them resolve the issue themselves.</div>
+            </div>
+        </li>
+        <li id="q4">
+            <div class="questionWrapper">
+                <div class="question">[sortpie]A family member asks you to break a rule for their benefit. What do you do? Please pick the options <u>from</u> the one you agree with the least <u>to</u> the one you agree with the most.</div>
+                <div class="answer" value="U8">I consider the consequences and do what’s best for everyone involved.</div>
+                <div class="answer" value="L20">I refuse to break the rules and encourage them to find an alternative solution.</div>
+                <div class="answer" value="D16">I agree if it benefits me in some way.</div>
+                <div class="answer" value="R6xL2">I weigh the importance of the rule and may bend it if it’s not crucial.</div>
+                <div class="answer" value="Z">Done, next question!</div>
+            </div>
+        </li>
+        <li id="q5">
+            <div class="questionWrapper">
+                <div class="question">How do you handle family secrets?</div>
+                <div class="answer" value="U9">I respect the privacy of others and keep their secrets.</div>
+                <div class="answer" value="L14">I adhere to family loyalty and only share secrets if it’s necessary for the greater good.</div>
+                <div class="answer" value="D9xR4">I keep secrets, but may use them as leverage in the future.</div>
+                <div class="answer" value="L12">I don’t believe in secrets; honesty is more important.</div>
+            </div>
+        </li>
+        <li id="q6">
+            <div class="questionWrapper">
+                <div class="question">Your family disapproves of your romantic partner. How do you react?</div>
+                <div class="answer" value="U11">I consider their concerns but ultimately follow my heart.</div>
+                <div class="answer" value="L18">I respect my family’s wishes and end the relationship.</div>
+                <div class="answer" value="D8xR5">I continue the relationship in secret, not caring about their opinion.</div>
+                <div class="answer" value="R19">I value my independence and tell my family to stay out of my personal life.</div>
+            </div>
+        </li>
+        <li id="q7">
+            <div class="questionWrapper">
+                <div class="question">[checkpie]What qualities do you value most in a friend or partner? You may pick more than one answer(s).</div>
+                <div class="answer" value="U17">Compassion, empathy, and kindness.</div>
+                <div class="answer" value="L13">Loyalty, honesty, and reliability.</div>
+                <div class="answer" value="D6xR4">Ambition, cunning, and resourcefulness.</div>
+                <div class="answer" value="R10">Spontaneity, creativity, and adaptability.</div>
+                <div class="answer" value="Z">Done, next question!</div>
+            </div>
+        </li>
+        <li id="q8">
+            <div class="questionWrapper">
+                <div class="question">A friend asks you to lie for them. What do you do?</div>
+                <div class="answer" value="U5">I try to find an honest solution to their problem instead.</div>
+                <div class="answer" value="L19">I refuse to lie and encourage my friend to face the consequences.</div>
+                <div class="answer" value="D12">I lie if it benefits me as well.</div>
+                <div class="answer" value="R7xU3">I evaluate the situation and may lie if it doesn’t harm anyone.</div>
+            </div>
+        </li>
+        <li id="q9">
+            <div class="questionWrapper">
+                <div class="question">Your partner has a different opinion on a major life decision. How do you handle it?</div>
+                <div class="answer" value="U14">We discuss our perspectives and work together to find a solution.</div>
+                <div class="answer" value="L11">I encourage them to follow established rules and traditions.</div>
+                <div class="answer" value="D7xR6">I manipulate the situation to get my way.</div>
+                <div class="answer" value="R18">I value individuality and think we should pursue our own paths.</div>
+            </div>
+        </li>
+        <li id="q10">
+            <div class="questionWrapper">
+                <div class="question">A friend is being treated unfairly. What do you do?</div>
+                <div class="answer" value="U16xR11">I defend my friend and stand up against the injustice.</div>
+                <div class="answer" value="L10">I follow proper channels to report the issue and seek resolution.</div>
+                <div class="answer" value="D4xR9">I use the situation to my advantage while appearing to help my friend.</div>
+                <div class="answer" value="R13">I encourage my friend to fight back and break free from the situation.</div>
+            </div>
+        </li>
+        <li id="q11">
+            <div class="questionWrapper">
+                <div class="question">How do you handle conflicts in your relationships?</div>
+                <div class="answer" value="U12">I listen and empathize, working towards a resolution that benefits everyone involved.</div>
+                <div class="answer" value="L15">I stick to established guidelines and expect others to do the same.</div>
+                <div class="answer" value="D11">I assert my dominance and make sure my needs are met first.</div>
+                <div class="answer" value="R8xL4">I look for creative solutions and may bend the rules if it leads to a better outcome.</div>
+            </div>
+        </li>
+        <li id="q12">
+            <div class="questionWrapper">
+                <div class="question">Your partner wants to move far away for a job opportunity. How do you react?</div>
+                <div class="answer" value="U10">I support their decision and work together to plan our future.</div>
+                <div class="answer" value="L14">I discuss the pros and cons, considering the impact on our current life and commitments.</div>
+                <div class="answer" value="D9xR5">I weigh the potential benefits for myself before making a decision.</div>
+                <div class="answer" value="R16">I am excited for the change and embrace the new adventure.</div>
+            </div>
+        </li>
+        <li id="q13">
+            <div class="questionWrapper">
+                <div class="question">[sortpie]How would you handle a dispute between two neighbors? Please pick the options <u>from</u> the one you agree with the least <u>to</u> the one you agree with the most.</div>
+                <div class="answer" value="U9xL7">Mediate the conflict by listening to both sides and finding a fair solution.</div>
+                <div class="answer" value="L12">Call the local authorities and let them handle the situation.</div>
+                <div class="answer" value="D10xR8">Encourage the conflict to escalate, just for the fun of it.</div>
+                <div class="answer" value="R15">Avoid getting involved and let them sort it out themselves.</div>
+                <div class="answer" value="Z">Done, next question!</div>
+            </div>
+        </li>
+        <li id="q14">
+            <div class="questionWrapper">
+                <div class="question">A stranger asks you for directions. What do you do?</div>
+                <div class="answer" value="U11">Happily provide accurate directions and wish them well.</div>
+                <div class="answer" value="L14">Refer them to the nearest information booth or map.</div>
+                <div class="answer" value="D7xR9">Deliberately give them incorrect directions to cause confusion.</div>
+                <div class="answer" value="R12">Ignore them and continue with your day.</div>
+            </div>
+        </li>
+        <li id="q15">
+            <div class="questionWrapper">
+                <div class="question">You find a lost wallet full of cash. What do you do with it?</div>
+                <div class="answer" value="U10xL8">Turn it in to the nearest lost and found or contact the owner.</div>
+                <div class="answer" value="L13xR9">Use the information inside to locate the owner and return it personally.</div>
+                <div class="answer" value="D12">Keep the cash for yourself and discard the wallet.</div>
+                <div class="answer" value="R3xD5">Take some cash as a “finder’s fee” and then turn in the wallet.</div>
+            </div>
+        </li>
+        <li id="q16">
+            <div class="questionWrapper">
+                <div class="question">A local charity is seeking volunteers for a community clean-up event. How do you respond?</div>
+                <div class="answer" value="U14">Sign up and enthusiastically participate in the event.</div>
+                <div class="answer" value="L11">Support the event by spreading the word and encouraging others to join.</div>
+                <div class="answer" value="D6xR10">Mock the event and discourage others from participating.</div>
+                <div class="answer" value="R13">Ignore the request and go about your normal routine.</div>
+            </div>
+        </li>
+        <li id="q17">
+            <div class="questionWrapper">
+                <div class="question">Your friend is struggling with a personal problem. How do you help?</div>
+                <div class="answer" value="U12xL6">Offer emotional support and help them find resources to address the issue.</div>
+                <div class="answer" value="L9">Encourage them to seek professional help or follow established guidelines.</div>
+                <div class="answer" value="D8xR11">Manipulate their vulnerability for your own gain.</div>
+                <div class="answer" value="R14">Listen to their problem but offer no advice or assistance.</div>
+            </div>
+        </li>
+        <li id="q18">
+            <div class="questionWrapper">
+                <div class="question">You are driving on the road and you see the vehicle in front of you run a red light. What would you do?</div>
+                <div class="answer" value="U7xL10">Report it immediately to the police, if possible with evidence. If there is no evidence, try to track down the driver.</div>
+                <div class="answer" value="L15">If you can record video evidence and have time, report it to the police.</div>
+                <div class="answer" value="D14">If there is an opportunity, try to extort money from the driver.</div>
+                <div class="answer" value="R9xD12">Looks like there’s no camera. I will just follow the driver and run the red light together.</div>
+                <div class="answer" value="L6xN12">I would act as if the vehicle wasn’t there and obey the traffic laws by waiting for the light to turn green before proceeding.</div>
+            </div>
+        </li>
+        <li id="q19">
+            <div class="questionWrapper">
+                <div class="question">[checkpie]How do you think nations should handle conflicts with one another? You may pick more than one answer(s).</div>
+                <div class="answer" value="U13xL5">Engage in diplomacy and negotiations to find mutually beneficial solutions.</div>
+                <div class="answer" value="L11">Strictly follow international laws and established procedures.</div>
+                <div class="answer" value="D9xR7">Use covert operations and subterfuge to undermine rivals.</div>
+                <div class="answer" value="R15">Encourage revolution and instability in rival nations.</div>
+                <div class="answer" value="Z">Done, next question!</div>
+            </div>
+        </li>
+        <li id="q20">
+            <div class="questionWrapper">
+                <div class="question">What is your opinion on immigration and border control?</div>
+                <div class="answer" value="U12">Welcome immigrants and provide support for their integration into society.</div>
+                <div class="answer" value="L14">Implement fair and strict immigration laws to maintain national order.</div>
+                <div class="answer" value="D7xR10">Exploit immigrants for personal or national gain.</div>
+                <div class="answer" value="R13">Disregard immigration laws and promote open borders.</div>
+            </div>
+        </li>
+        <li id="q21">
+            <div class="questionWrapper">
+                <div class="question">How should a nation address income inequality?</div>
+                <div class="answer" value="U15">Implement social safety nets and progressive taxation to reduce disparities.</div>
+                <div class="answer" value="L12">Maintain a merit-based system and enforce existing economic regulations.</div>
+                <div class="answer" value="D8xR11">Exploit the poor and consolidate wealth among the elite.</div>
+                <div class="answer" value="R9">Encourage a free market with minimal government intervention.</div>
+            </div>
+        </li>
+        <li id="q22">
+            <div class="questionWrapper">
+                <div class="question">What is the role of a nation’s military?</div>
+                <div class="answer" value="U6xL10">Defend against threats and contribute to international peacekeeping efforts.</div>
+                <div class="answer" value="L13">Maintain national security and uphold the rule of law.</div>
+                <div class="answer" value="D14">Expand national influence through conquest and intimidation.</div>
+                <div class="answer" value="R7xD12">Support rebellions and destabilize rival nations.</div>
+            </div>
+        </li>
+        <li id="q23">
+            <div class="questionWrapper">
+                <div class="question">[checkpie]How should a nation balance environmental protection and economic growth? You may pick more than one answer(s).</div>
+                <div class="answer" value="U11xL7">Implement sustainable policies and invest in clean technology.</div>
+                <div class="answer" value="L9">Strictly enforce environmental regulations and penalties.</div>
+                <div class="answer" value="D13">Exploit natural resources without concern for environmental consequences.</div>
+                <div class="answer" value="R14">Focus on economic growth, regardless of environmental impact.</div>
+                <div class="answer" value="Z">Done, next question!</div>
+            </div>
+        </li>
+        <li id="q24">
+            <div class="questionWrapper">
+                <div class="question">What is your stance on a nation’s right to self-determination?</div>
+                <div class="answer" value="U10">Support the rights of all nations to choose their own path and governance.</div>
+                <div class="answer" value="L8">Uphold international law and respect the decisions of recognized authorities.</div>
+                <div class="answer" value="D11xR5">Encourage secession and fragmentation to weaken rival nations.</div>
+                <div class="answer" value="R12">Support revolutionary movements and the overthrow of established governments.</div>
+            </div>
+        </li>
+        <li id="q25">
+            <div class="questionWrapper">
+                <div class="question">You find a wallet on the street containing a significant amount of money. What do you do?</div>
+                <div class="answer" value="L10">Turn it in to the local authorities.</div>
+                <div class="answer" value="U8">Try to find the owner and return it to them.</div>
+                <div class="answer" value="R7xD12">Keep the money for yourself.</div>
+                <div class="answer" value="R5">Spend it on something fun and spontaneous.</div>
+            </div>
+        </li>
+        <li id="q26">
+            <div class="questionWrapper">
+                <div class="question">A friend asks you for a loan but has a history of being unreliable with money. How do you respond?</div>
+                <div class="answer" value="U9">Lend them the money, hoping they’ll do better this time.</div>
+                <div class="answer" value="L8">Offer to help them create a budget and find a solution.</div>
+                <div class="answer" value="D10">Refuse and remind them of their past mistakes.</div>
+                <div class="answer" value="R6xD5">Agree, but only if they pay a high interest rate.</div>
+            </div>
+        </li>
+        <li id="q27">
+            <div class="questionWrapper">
+                <div class="question">You are in a position to donate money to a charity. What kind of charity do you choose?</div>
+                <div class="answer" value="U12">One that helps the most vulnerable people in society.</div>
+                <div class="answer" value="L9">A well-established charity with a proven track record.</div>
+                <div class="answer" value="R8">A new and innovative charity that challenges the status quo.</div>
+                <div class="answer" value="D11">One that will provide you with personal benefits in return.</div>
+            </div>
+        </li>
+        <li id="q28">
+            <div class="questionWrapper">
+                <div class="question">[sortpie]You receive an unexpected bonus at work. How do you spend it? Please pick the options <u>from</u> the one you agree with the least <u>to</u> the one you agree with the most.</div>
+                <div class="answer" value="U7">Share it with your friends and family.</div>
+                <div class="answer" value="L6">Save it for a rainy day or invest it responsibly.</div>
+                <div class="answer" value="R9">Splurge on a spontaneous adventure or luxury item.</div>
+                <div class="answer" value="D8">Use it to gain power or influence over others.</div>
+                <div class="answer" value="Z">Done, next question!</div>
+            </div>
+        </li>
+        <li id="q29">
+            <div class="questionWrapper">
+                <div class="question">[sortpie]You have the opportunity to invest in a business. What type of business do you choose? Please pick the options <u>from</u> the one you agree with the least <u>to</u> the one you agree with the most.</div>
+                <div class="answer" value="U10">A socially responsible business that positively impacts the community.</div>
+                <div class="answer" value="L11">A stable, well-regulated, and law-abiding business.</div>
+                <div class="answer" value="R7">A risky, cutting-edge business with the potential for huge returns.</div>
+                <div class="answer" value="D9">A business that exploits its employees or customers for profit.</div>
+                <div class="answer" value="Z">Done, next question!</div>
+            </div>
+        </li>
+        <li id="q30">
+            <div class="questionWrapper">
+                <div class="question">[sortpie]How do you feel about paying taxes? Please pick the options <u>from</u> the one you agree with the least <u>to</u> the one you agree with the most.</div>
+                <div class="answer" value="L12">It’s a necessary duty to support society and its infrastructure.</div>
+                <div class="answer" value="U6">It’s important, but the system should be more progressive and fair.</div>
+                <div class="answer" value="R8">It’s an unreasonable burden that stifles personal freedom.</div>
+                <div class="answer" value="D7">It’s a system that can be exploited for personal gain.</div>
+                <div class="answer" value="Z">Done, next question!</div>
+            </div>
+        </li>
+        <li id="q31">
+            <div class="questionWrapper">
+                <div class="question">You witness someone shoplifting. What do you do?</div>
+                <div class="answer" value="L9">Report them to the store security or management.</div>
+                <div class="answer" value="U5">Confront them and encourage them to return the stolen item.</div>
+                <div class="answer" value="D10">Blackmail them for your own benefit.</div>
+                <div class="answer" value="R6">Ignore it and mind your own business.</div>
+            </div>
+        </li>
+        <li id="q32">
+            <div class="questionWrapper">
+                <div class="question">[sortpie]A new law is passed that you disagree with. How do you respond? Please pick the options <u>from</u> the one you agree with the least <u>to</u> the one you agree with the most.</div>
+                <div class="answer" value="U7xL5">Work within the system to advocate for change.</div>
+                <div class="answer" value="R9">Protest or resist the law in a disruptive manner.</div>
+                <div class="answer" value="D8">Find ways to exploit the law for your own gain.</div>
+                <div class="answer" value="L6">Accept and obey it, even if you don’t agree with it.</div>
+                <div class="answer" value="Z">Done, next question!</div>
+            </div>
+        </li>
+        <li id="q33">
+            <div class="questionWrapper">
+                <div class="question">[sortpie]You are pulled over for speeding. How do you handle the situation? Please pick the options <u>from</u> the one you agree with the least <u>to</u> the one you agree with the most.</div>
+                <div class="answer" value="L10">Apologize and accept the consequences.</div>
+                <div class="answer" value="U6xL4">Explain the situation politely and hope for leniency.</div>
+                <div class="answer" value="R7">Try to talk your way out of it or deceive the officer.</div>
+                <div class="answer" value="D9">Attempt to bribe the officer to let you go.</div>
+                <div class="answer" value="Z">Done, next question!</div>
+            </div>
+        </li>
+        <li id="q34">
+            <div class="questionWrapper">
+                <div class="question">[sortpie]How do you feel about the role of law enforcement in society? Please pick the options <u>from</u> the one you agree with the least <u>to</u> the one you agree with the most.</div>
+                <div class="answer" value="U8">They should prioritize helping and protecting the community.</div>
+                <div class="answer" value="L12">They play a crucial role in maintaining order and enforcing laws.</div>
+                <div class="answer" value="R5">They often overreach and should be reined in.</div>
+                <div class="answer" value="D7">They can be manipulated and used as a tool for personal power.</div>
+                <div class="answer" value="Z">Done, next question!</div>
+            </div>
+        </li>
+        <li id="q35">
+            <div class="questionWrapper">
+                <div class="question">[sortpie]Your friend confides in you that they committed a minor crime. What do you do? Please pick the options <u>from</u> the one you agree with the least <u>to</u> the one you agree with the most.</div>
+                <div class="answer" value="L7">Encourage them to turn themselves in and face the consequences.</div>
+                <div class="answer" value="U9">Offer support and help them make amends for their actions.</div>
+                <div class="answer" value="D11">Use the information to your advantage in the future.</div>
+                <div class="answer" value="R6">Keep their secret and enjoy the thrill of knowing.</div>
+                <div class="answer" value="Z">Done, next question!</div>
+            </div>
+        </li>
+        <li id="q36">
+            <div class="questionWrapper">
+                <div class="question">[sortpie]You are asked to serve on a jury. How do you approach the responsibility? Please pick the options <u>from</u> the one you agree with the least <u>to</u> the one you agree with the most.</div>
+                <div class="answer" value="L11">Take it seriously and base your decision on the facts and the law.</div>
+                <div class="answer" value="U6xL5">Consider the context and any mitigating circumstances.</div>
+                <div class="answer" value="R8">Question the validity of the legal system and its process.</div>
+                <div class="answer" value="D7">Use your position to manipulate the outcome for personal gain.</div>
+                <div class="answer" value="Z">Done. Show me my results!</div>
+            </div>
+        </li>
+    </ul>
+    <div class="main_view" id="result_details">
+        <div id="snapshot-container">
+            <div id="qe-rslt-title">Your <b>Alignment Test</b> Result:</div>
+            <div id="quadrant">
+                <div id="quadrant-up">Good</div>
+                <div id="quadrant-middle">
+                    <div id="quadrant-left"></div>
+                    <div id="quadrant-center-wrap">
+                        <div id="quadrant-center"></div><svg id="dda-svg" viewBox="-20 -20 940 940" xmlns="http://www.w3.org/2000/svg"><g class="dda-quads"><rect id="dda-8" fill="#C22" x="600" y="600" width="300" height="300" /><rect id="dda-7" fill="#989" x="300" y="600" width="300" height="300" /><rect id="dda-6" fill="#B8D" x="0" y="600" width="300" height="300" /><rect id="dda-5" fill="#FCD" x="600" y="300" width="300" height="300" /><rect id="dda-4" fill="#6C6" x="300" y="300" width="300" height="300" /><rect id="dda-3" fill="#DEE" x="0" y="300" width="300" height="300" /><rect id="dda-2" fill="#F83" x="600" y="0" width="300" height="300" /><rect id="dda-1" fill="#FE7" x="300" y="0" width="300" height="300" /><rect id="dda-0" fill="#5BE" x="0" y="0" width="300" height="300" /></g><g class="dda-bframes"><line x1="0" y1="300" x2="900" y2="300" /><line x1="0" y1="600" x2="900" y2="600" /><line x1="300" y1="0" x2="300" y2="900" /><line x1="600" y1="0" x2="600" y2="900" /></g><rect id="dda-out" x="3" y="3" width="894" height="894" /><circle id="dda-result" r="15" cx="450" cy="450" /><g class="dda-frames"><line x1="0" y1="50" x2="900" y2="50" /><line x1="0" y1="100" x2="900" y2="100" /><line x1="0" y1="150" x2="900" y2="150" /><line x1="0" y1="200" x2="900" y2="200" /><line x1="0" y1="250" x2="900" y2="250" /><line x1="0" y1="350" x2="900" y2="350" /><line x1="0" y1="400" x2="900" y2="400" /><line x1="0" y1="450" x2="900" y2="450" /><line x1="0" y1="500" x2="900" y2="500" /><line x1="0" y1="550" x2="900" y2="550" /><line x1="0" y1="650" x2="900" y2="650" /><line x1="0" y1="700" x2="900" y2="700" /><line x1="0" y1="750" x2="900" y2="750" /><line x1="0" y1="800" x2="900" y2="800" /><line x1="0" y1="850" x2="900" y2="850" /><line x1="50" y1="0" x2="50" y2="900" /><line x1="100" y1="0" x2="100" y2="900" /><line x1="150" y1="0" x2="150" y2="900" /><line x1="200" y1="0" x2="200" y2="900" /><line x1="250" y1="0" x2="250" y2="900" /><line x1="350" y1="0" x2="350" y2="900" /><line x1="400" y1="0" x2="400" y2="900" /><line x1="450" y1="0" x2="450" y2="900" /><line x1="500" y1="0" x2="500" y2="900" /><line x1="550" y1="0" x2="550" y2="900" /><line x1="650" y1="0" x2="650" y2="900" /><line x1="700" y1="0" x2="700" y2="900" /><line x1="750" y1="0" x2="750" y2="900" /><line x1="800" y1="0" x2="800" y2="900" /><line x1="850" y1="0" x2="850" y2="900" /></g></svg></div>
+                    <div id="quadrant-right"></div>
+                </div>
+                <div id="quadrant-down">Evil</div>
+            </div>
+        </div>
+        <p class="momo">To see how other people scored on this test, please follow our <a rel="noopener" href="https://facebook.com/arealme" target="_blank">Facebook Page</a>.</p>
+        <script>
+            window._rsbtxt = ["Post to Twitter", "Share on Facebook", "Link", "Link Copied!", "AlignmentTest", "More Options ...", ""]
+        </script>
+        <div id="fast-wrap">
+            <div id="social-btnext"></div>
+            <div id="more-btnext"></div>
+        </div><a class="again" href="https://www.arealme.com/alignment-test/en/" title="Alignment Test / Moral Alignment Test"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="26"><g fill="#666" fill-rule="evenodd"><path d="M15 23a8 8 0 1 0 0-16V4A11 11 0 1 1 4 15h3c0 4 4 8 8 8Z" /><path d="M16 0v11L7 6z" /></g></svg>Try again</a></div>
+    <script id="benchworker" type="text/js-worker">function performCPUIntensiveTask(){for(var n=0,e=0;e
+        <1e6;e++)n+=Math.sin(Math.cos(Math.tan(Math.sqrt(e))));return n}self.addEventListener( "message",function(n){var e,s=performance.now();performCPUIntensiveTask();var r=performance.now()-s;e=r<=35?5:r<=60?4:r<=75?3:r<=150?2:1,self.postMessage({b:e,v:r})});</script>
+            <script>
+                window.$isMan = !/phantomjs/i.test(navigator.userAgent), window.$isFB = /;FB/i.test(navigator.userAgent), window.$isWeixin = !1, window.test = {
+                    url: "https://www.arealme.com/alignment-test/en/",
+                    lang: "en",
+                    name: "alignment-test",
+                    title: "Alignment Test / Moral Alignment Test",
+                    v: 2
+                }, window.og_link = test.url, window.lang_type = test.lang, window.test_type = test.name, window.test_lang = test.lang, window.BM_LEVEL = 0, window.BM_VALUE = 0, window.requestAnimationFrame = window.requestAnimationFrame || function(t) {
+                    return setTimeout(t, 16)
+                }, window.requestIdleCallback = window.requestIdleCallback || function(t) {
+                    return setTimeout(t, 16)
+                };
+                try {
+                    var blob = new Blob([document.getElementById("benchworker").textContent], {
+                            type: "text/javascript"
+                        }),
+                        worker = new Worker(window.URL.createObjectURL(blob));
+                    worker.addEventListener("message", (function(t) {
+                        window.BM_LEVEL = t.data.b, window.BM_VALUE = t.data.v
+                    })), worker.postMessage("")
+                } catch (t) {}
+
+                function ssT(t) {}
+
+                function g(t, e) {}
+                var __v = !0;
+
+                function aload(t, e, n = !1, a = !1, o = !1) {
+                    var i = document,
+                        r = window;
+
+                    function s() {
+                        var r = i.createElement("script");
+                        r.onload = e, o && (r.async = "true"), n && (r.fetchpriority = n), a && (r.crossOrigin = "anonymous"), r.src = t;
+                        try {
+                            i.head.appendChild(r)
+                        } catch (t) {
+                            document.documentElement.appendChild(r)
+                        }
+                    }
+                    __v ? (__v = !1, r.addEventListener ? r.addEventListener("load", s, !1) : r.attachEvent ? r.attachEvent("onload", s) : s()) : s()
+                }
+
+                function getRpId() {
+                    return test.url + "RP"
+                }
+
+                function resultParseHelper() {
+                    $("#back_button").remove(), localStorage.removeItem(getRpId()), $(".momo,#collection").hide(), $("#progress").css("visibility", "hidden"), $("#result_details").show(), $("#result_details").after($(".samelang_links_img")), window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "instant"
+                    }), requestIdleCallback(() => {
+                        aload("https://www.arealme.com/static/futrb.js", () => {
+                            if (window.rh_arr)
+                                for (var t = 0; t < rh_arr.length; t++) rh_arr[t]()
+                        }), setTimeout((function() {
+                            window.onbeforeunload = null
+                        }), 999)
+                    })
+                }
+
+                function uss() {
+                    var t = _rsbtxt[4],
+                        e = "//twitter.com/share?" + o({
+                            text: prestige,
+                            hashtags: t,
+                            url: og_result_url
+                        });
+                    $(".fastsharetw").attr("href", e), $(".fastsharefb").attr("href", "https://www.facebook.com/sharer/sharer.php?u=" + og_result_url), $(".fastsharefb").unbind("click.aw").bind("click.aw", (function() {
+                        return window.FB ? (FB.ui({
+                            method: "share",
+                            mobile_iframe: "ontouchstart" in window || navigator.msMaxTouchPoints > 0,
+                            href: og_result_url
+                        }, (function(t) {})), !1) : void 0
+                    }));
+                    var n = ` #${t}#`;
+                    " ##" == n && (n = "");
+                    var a = "http://service.weibo.com/share/share.php?" + o({
+                        appkey: "",
+                        title: prestige + n,
+                        url: og_result_url,
+                        pic: og_result_img
+                    });
+
+                    function o(t) {
+                        return Object.keys(t).map((function(e) {
+                            return encodeURIComponent(e) + "=" + encodeURIComponent(t[e])
+                        })).join("&")
+                    }
+                    $(".fastsharewb").attr("href", a), $(".ow-wb").replaceWith($(".ow-wb").clone()), $(".ow-wb").click((function() {
+                        window.open(a)
+                    })), "function" == typeof _rsbtxt[6] && _rsbtxt[6]()
+                }! function() {
+                    {
+                        function t(t, e, n, a) {
+                            var o = document.querySelectorAll(t)[0],
+                                i = `<svg width="100%" viewBox="0 0 ${2*e} ${2*n}" xmlns="http://www.w3.org/2000/svg"><text fill="#${a}" font-style="italic" x="${e}" y="${n}" font-family="Arial, Helvetica, sans-serif" dominant-baseline="middle" text-anchor="middle" >AREALME.COM</text></svg>`;
+                            o.style.backgroundRepeat = "no-repeat", o.style.backgroundPosition = "center", o.style.backgroundImage = `url("data:image/svg+xml,${encodeURIComponent(i)}")`
+                        }
+                        t(".leader_ad_banner", 80, 40, "9992"), t(".lowerad", 100, 50, "9991");
+                        var e = 0,
+                            n = document.getElementById("progress-inner"),
+                            a = setInterval((function() {
+                                e += (90 - e) / 1e3, n.style.transform = `scaleX(${e})`, window.jQuery && (n.style.transform = "scaleX(1.05)", clearInterval(a))
+                            }), 300)
+                    }
+                }(), aload("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js", (function() {
+                    setTimeout(() => {
+                        var t, e = !1,
+                            n = function() {
+                                e || (aload("https://www.arealme.com/static/scrext.js?3", (function() {
+                                    localStorage.setItem("scrextloaded", "1")
+                                })), e = !0)
+                            },
+                            a = [],
+                            o = [];
+                        window.WINDOW_WIDTH = window.innerWidth, window.og_result_url = og_link, window.og_result_img = $('meta[property="og:image"]').attr("content"), $isMan ? (window.ga = function() {}, requestAnimationFrame(() => {
+                            $(".samelang_links_img img").each((function() {
+                                var t = $(this).parent("a").attr("href").split("/")[1];
+                                $(this).attr("src", "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='23px' width='44px'%3E%3Crect width='100%25' fill='rgba(0,0,0,.1)'/%3E%3Ctext font-family='arial' font-style='italic' x='8' y='13' fill='rgba(0,0,0,.1)' font-size='6'%3EA Real Me%3C/text%3E%3C/svg%3E").attr("aw-src", "https://www.arealme.com/newimg/tn_@2x_" + t + ".png")
+                            }))
+                        }), "1" == localStorage.getItem("scrextloaded") ? setTimeout(n, 200) : $(window).one("scroll", n), window.prestige_loaded = function() {
+                            window.prestige_img = og_result_img, uss()
+                        }, $("body").addClass("arealman")) : (window.ga = function() {}, $("ins").remove()), document.getElementById("start").addEventListener("click", (function(i) {
+                            var r = document.createElement("link");
+                            r.href = "https://www.arealme.com/static/futrb.js", r.rel = "preload", r.as = "script", document.head.appendChild(r), e || n(), $("#start").show();
+
+                            function s(t) {
+                                $(".pointer-events-none").removeClass("pointer-events-none");
+                                var e = $("#q" + t);
+                                e.trigger("QuestionShow"), e.toggle()
+                            }
+                            t = 1;
+                            var l = 36;
+                            window.onbeforeunload = function(t) {
+                                    return !0
+                                },
+                                function() {
+                                    function e(t) {
+                                        t.attr("value") > 0 ? t.addClass("ans-correct") : t.addClass("ans-incorrect")
+                                    }
+
+                                    function n(t) {
+                                        t.parent().find(".ans-on").removeClass("ans-on"), t.addClass("ans-on").parent().addClass("pointer-events-none"), requestAnimationFrame(() => {
+                                            i && (t.siblings(".answer").each((function() {
+                                                e($(this))
+                                            })), e(t))
+                                        })
+                                    }
+                                    var i = !1,
+                                        r = window._CD0 || (i ? 999 : 299); {
+                                        function c() {
+                                            $("#progress-bg")[0].style.transform = `scaleX(${t/l})`
+                                        }
+                                    }
+                                    $(".answer").click((function(e, i) {
+                                        var d = $(this),
+                                            u = r;
+                                        i && i.retake && (!0, u = 0);
+                                        var w = d.attr("value"),
+                                            m = w.split("to,")[1] / 1,
+                                            g = m == m,
+                                            p = !1;
+                                        if (g && (w = w.split("to,")[0]), (window.iq_value || 0 === window.iq_value) && o.push(iq_value), t >= 1 && $(".inactive-button").removeClass("inactive-button"), $("#back_button").addClass("pointer-events-none"), w && (g && (w = w.split(",").join("")), updateValue(w, t)), g && 0 == m && (p = !0), !window.ignoreCountCheck && t == l || p || window.override_play) {
+                                            n(d);
+                                            var h = setInterval(() => {
+                                                $.fn.textfill && $.easing.easeOutQuint && (clearInterval(h), requestAnimationFrame(() => {
+                                                    resultParseHelper(), resultParse()
+                                                }))
+                                            }, u / 2)
+                                        } else {
+                                            try {
+                                                requestIdleCallback(() => {
+                                                    a.push(d.parent().find(".answer").index(this)), localStorage.setItem(getRpId(), JSON.stringify(a))
+                                                })
+                                            } catch (t) {}
+                                            g ? (t = m, n(d), setTimeout((function() {
+                                                c(), s(m), d.parent().parent().toggle()
+                                            }), u)) : (t++, n(d), setTimeout((function() {
+                                                c(), s(t), d.parent().parent().toggle()
+                                            }), u))
+                                        }
+                                    }))
+                                }(), requestAnimationFrame(() => {
+                                    $("#splash").hide(), $("#progress").css("visibility", "visible"), requestAnimationFrame(() => {
+                                        $("#collection").show(), requestAnimationFrame(() => {
+                                            window.scrollTo(0, 0), s(1)
+                                        })
+                                    })
+                                }), window.ih_arr = window.ih_arr || [], window.ih_arr.push((function() {
+                                    $(".question_view").after('\n      \n              <style>\n                .question_view {padding:0}\n                #back_button {\n                  display: flex;\n                  margin: 7em auto;\n                  border: none;\n                  background: none;\n                  color: #999;\n                  align-items:center;\n                  padding:1em;\n                }\n                #back_button.pointer-events-none {\n                  opacity: .2;\n                }\n                #back_button svg {width:9px}\n                #back_button svg path {fill:#333}\n                #back_button b { \n                  color: #333;\n                  margin-left: 10px;\n                  font-size: 1.4em;\n                  font-weight: normal;\n                }\n                .inactive-button {\n                  opacity:.2;\n                  pointer-events:none\n                }\n                #back_button_wrap {\n                  height:9em;\n                }\n              </style>\n              <div id="back_button_wrap">\n              <button id="back_button" class="inactive-button">\n                <svg width="15px" viewBox="0 0 587 999" xmlns="http://www.w3.org/2000/svg"><path d="m197 500 374-374c10-10 16-24 16-39 0-14-6-28-16-38l-33-33a54 54 0 0 0-38-16c-15 0-29 6-39 16L16 461a54 54 0 0 0-16 39c0 14 6 28 16 38l444 445c11 10 24 16 39 16s28-6 39-16l33-33c21-21 21-56 0-77L197 500Z" fill="#000" fill-rule="nonzero"/></svg>\n                <b>BACK</b>\n              </button>\n              </div>\n            '), $("#back_button").click((function() {
+                                        if (t > 1) {
+                                            var e = $("#q" + t),
+                                                n = $("#q" + (t - 1));
+                                            e.hide(), n.show(), t--, (window.iq_value || 0 === window.iq_value) && (iq_value = o.pop()), window.ocean && (window.ocean = JSON.parse(iq_value)), a.pop(), localStorage.setItem(getRpId(), JSON.stringify(a)), 1 == t && $(this).addClass("inactive-button")
+                                        }
+                                    }))
+                                })), window.ih_arr && ih_arr.forEach(t => {
+                                    t()
+                                })
+                        }), {
+                            once: !0
+                        }), window.main && main(), window.mh_arr && mh_arr.forEach(t => {
+                            t()
+                        }), setTimeout(() => {
+                            $(".lib-unld").removeClass("lib-unld"), $(".progress-button .content").css("opacity", "1")
+                        }, 600);
+                        try {
+                            var i = JSON.parse(localStorage.getItem(getRpId()));
+                            confirm("Do you want to start where you left off? (Question #{_})".split("{_}").join(i.length + 1)) ? function(t) {
+                                var e = {};
+                                $("#target-name, #target-owner, #county-img, #county-description").empty(), $("#start").click();
+                                $("#collection > li").length;
+                                var n = 0,
+                                    a = setInterval((function() {
+                                        n > 99999 && clearInterval(a);
+                                        var i = $("#collection > li").filter((function() {
+                                            return "none" != $(this).css("display")
+                                        }));
+                                        o[i.attr("id")] = 0;
+                                        var r = Object.keys(o).length - 1,
+                                            s = i.find(".answer:eq(" + t[r] + ")");
+                                        e.hasOwnProperty(["__x" + r]) ? n++ : (s.trigger("click", {
+                                            retake: !0
+                                        }), e["__x" + r] = !0);
+                                        r == t.length && clearInterval(a)
+                                    }), 16),
+                                    o = {}
+                            }(i) : localStorage.removeItem(getRpId())
+                        } catch (t) {}
+                    }, 100)
+                }), "high")
+            </script>
+            <script>
+                var prestige, iq_value = 0,
+                    prestige_key = "",
+                    prestige_img = ""
+            </script>
+            <script>
+                var ocean = {},
+                    ocean_dict = {},
+                    ocean_colors = [];
+
+                function updateValue(o) {
+                    "0" != o && (o.split("x").forEach(o => {
+                        ! function(o) {
+                            var a = o.split(""),
+                                i = a[0];
+                            a.shift();
+                            var n = Number(a.join(""));
+                            ocean[i] += n
+                        }(o)
+                    }), iq_value = JSON.stringify(ocean))
+                }! function() {
+                    for (var o = "L_Lawful_2B00FF|R_Chaotic_FF0000|U_Good_00FF84|D_Evil_FF00F7|N_Neutral_000000".split("|"), a = 0; a < o.length; a++) {
+                        var i = o[a].split("_"),
+                            n = i[0],
+                            c = i[1],
+                            _ = "#" + i[2];
+                        ocean[n] = 0, ocean_dict[n] = c, ocean_colors.push(_)
+                    }
+                    window.iq_value = JSON.stringify(ocean)
+                }()
+            </script>
+            <script>
+                function main() {
+                    var a = $("#alignment_skeleton")[0].outerHTML.replace(/<text[\s\S]*?<\/text>/g, "");
+                    $(".cele-wrap").each((function() {
+                        var t, e, n, r = [],
+                            i = $(this).find(".cele-chart");
+                        i.attr("data").split(",").forEach(a => {
+                            r.push(parseFloat(a))
+                        }), console.log(i, {
+                            coords: r
+                        }), i.html((t = r[0], e = r[1], n = `<circle r="50" cx="${900*t}" cy="${900*e}" /></svg>`, a.replace("</svg>", n)))
+                    }))
+                }
+
+                function resultParse() {
+                    ocean = JSON.parse(iq_value);
+                    var a = ocean_dict.U,
+                        t = ocean_dict.D,
+                        e = ocean_dict.L,
+                        n = ocean_dict.R,
+                        r = ocean_dict.N;
+                    $("#quadrant-up").text(a), $("#quadrant-down").text(t), $("#quadrant-left").text(e), $("#quadrant-right").text(n), $("#quadrant-center").text(r);
+                    var i = (ocean.R - ocean.L) / 100;
+                    i = Math.max(-1, i), i = Math.min(1, i);
+                    var s = (ocean.D - ocean.U) / 100;
+                    s = Math.max(-1, s), s = Math.min(1, s);
+                    var d = 900 * (i / 2 + .5),
+                        c = 900 * (s / 2 + .5),
+                        o = function(a, t) {
+                            a = p(a), t = p(t);
+                            let e = Math.floor((t + 1) / (2 / 3)),
+                                n = Math.floor((a + 1) / (2 / 3));
+                            return 3 * e + n
+                        }(i, s),
+                        l = $(".dda-section-" + o).html(),
+                        u = f(["#5BE", "#FE7", "#F83", "#DEE", "#6C6", "#FCD", "#B8D", "#989", "#C22"][o]),
+                        h = f(u);
+
+                    function f(a) {
+                        var t = function(a) {
+                                a = a.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (function(a, t, e, n) {
+                                    return t + t + e + e + n + n
+                                }));
+                                var t = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(a);
+                                return t ? {
+                                    r: parseInt(t[1], 16),
+                                    g: parseInt(t[2], 16),
+                                    b: parseInt(t[3], 16)
+                                } : null
+                            }(a),
+                            e = function(a, t, e) {
+                                a /= 255, t /= 255, e /= 255;
+                                const n = Math.max(a, t, e),
+                                    r = n - Math.min(a, t, e),
+                                    i = r ? n === a ? (t - e) / r : n === t ? 2 + (e - a) / r : 4 + (a - t) / r : 0;
+                                return [60 * i < 0 ? 60 * i + 360 : 60 * i, 100 * (r ? n <= .5 ? r / (2 * n - r) : r / (2 - (2 * n - r)) : 0), 100 * (2 * n - r) / 2]
+                            }(t.r, t.g, t.b);
+                        return function(a) {
+                            var t = a.r,
+                                e = a.g,
+                                n = a.b;
+
+                            function r(a) {
+                                var t = a.toString(16);
+                                return 1 == t.length ? "0" + t : t
+                            }
+                            return "#" + r(t) + r(e) + r(n)
+                        }(function(a, t, e) {
+                            e /= 100;
+                            const n = t => (t + a / 30) % 12,
+                                r = (t /= 100) * Math.min(e, 1 - e),
+                                i = a => e - r * Math.max(-1, Math.min(n(a) - 3, Math.min(9 - n(a), 1)));
+                            return {
+                                r: parseInt(255 * i(0)),
+                                g: parseInt(255 * i(8)),
+                                b: parseInt(255 * i(4))
+                            }
+                        }(parseInt(e[0]), parseInt(e[1]), parseInt(.5 * e[2])))
+                    }
+                    $("#snapshot-container").after(`<div style="background:linear-gradient(45deg, ${u}, ${h});color:#fff;border:2px solid ${h}" class="dda-your-desc arm-virgin">${l}</div>`), setTimeout(() => {
+                        $(".arm-virgin").removeClass("arm-virgin")
+                    }, 200);
+                    var v = ["Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "True Neutral", "Chaotic Neutral", "Lawful Evil", "Neutral Evil", "Chaotic Evil"][o];
+
+                    function p(a) {
+                        return Math.abs(a) > .9 && (a = .9 * Math.sign(a)), a
+                    }
+
+                    function m() {
+                        setTimeout((function() {
+                            $(".momo").css({
+                                opacity: 1
+                            })
+                        }), 999)
+                    }! function(a) {
+                        var t = "my-dda-level";
+                        switch (a) {
+                            case 0:
+                                $("#quadrant-up, #quadrant-left").addClass(t);
+                                break;
+                            case 1:
+                                $("#quadrant-up, #quadrant-center").addClass(t);
+                                break;
+                            case 2:
+                                $("#quadrant-up, #quadrant-right").addClass(t);
+                                break;
+                            case 3:
+                                $("#quadrant-center, #quadrant-left").addClass(t);
+                                break;
+                            case 4:
+                                $("#quadrant-center").addClass(t);
+                                break;
+                            case 5:
+                                $("#quadrant-center, #quadrant-right").addClass(t);
+                                break;
+                            case 6:
+                                $("#quadrant-left, #quadrant-down").addClass(t);
+                                break;
+                            case 7:
+                                $("#quadrant-down, #quadrant-center").addClass(t);
+                                break;
+                            case 8:
+                                $("#quadrant-down, #quadrant-right").addClass(t)
+                        }
+                    }(o), $("#dda-" + o).addClass("dda-current-quad"), prestige = "According to the alignment test, I am %RESULT%. Discover your alignment type by taking this test now!".split("%RESULT%").join(v), document.title = prestige, prestige_key = test.url + iq_value + "v2", ($isMan ? function() {
+                        $("#dda-result").addClass("dda-result-ani"), m()
+                    } : m)(), setTimeout(() => {
+                        $("#dda-result").attr("cx", d).attr("cy", c).addClass("dda-result-final")
+                    }, 0)
+                }
+                window.ih_arr = window.ih_arr || [], window.ih_arr.push((function() {
+                    function a(a, t) {
+                        a[t ? "removeClass" : "addClass"]("unclickable")
+                    }
+
+                    function t(a) {
+                        var t = a.split(""),
+                            e = t[0];
+                        return t.shift(), [e, Number(t.join(""))]
+                    }
+
+                    function e(a) {
+                        var t = [];
+                        for (var e in a) t.push(e + "" + a[e]);
+                        return t.join("x")
+                    }
+                    $("#collection").on("click", ".cb_item", (function() {
+                        $(this).toggleClass("cb_selected");
+                        var a = $(this).parent(),
+                            n = [];
+                        a.find(".cb_item").each((function() {
+                            $(this).hasClass("cb_selected") && n.push($(this).data("value"))
+                        }));
+                        var r = {};
+                        n.forEach((function(a) {
+                            a.split("x").forEach((function(a) {
+                                var e = t(a);
+                                let n = e[0],
+                                    i = e[1];
+                                r[n] || (r[n] = 0), r[n] += i
+                            }))
+                        })), a.siblings(".question").parent().find(".answer").attr("value", e(r))
+                    })), $("#collection").on("click", ".ab_item", (function() {
+                        var n = $(this).parent(),
+                            r = $(this).index(),
+                            i = [];
+                        n.data("sort_data") && (i = n.data("sort_data")), i.includes(r) ? i = i.filter(a => ![r].includes(a)) : i.push(r), n.data("sort_data", i);
+                        for (var s = 0; s < i.length; s++) {
+                            r = i[s];
+                            var d = n.find(".ab_item:eq(" + r + ")");
+                            0 == d.find(".ab_sort_id").length && d.append('<b class="ab_sort_id"></b>'), d.find(".ab_sort_id").text(s + 1)
+                        }
+                        $(this).toggleClass("ab_selected"), $(this).hasClass("ab_selected") || $(this).find(".ab_sort_id").remove();
+                        var c = n.siblings(".question").parent().find(".answer"),
+                            o = i.length,
+                            l = {};
+                        o < $(this).siblings().length + 1 ? a(c, !1) : (a(c, !0), i.forEach((function(a, e) {
+                            var r = a + 1;
+                            n.find(`.ab_item:nth-child(${r})`).data("value").split("x").forEach((function(a) {
+                                var n = t(a);
+                                let r = n[0],
+                                    i = n[1];
+                                l[r] || (l[r] = 0), l[r] += Math.round(i / Math.pow(2, e))
+                            }))
+                        }))), c.attr("value", e(l))
+                    })), $("#collection").children("li").each((function() {
+                        var t = $(this),
+                            e = t.find(".question"),
+                            n = e.html();
+                        if (n.startsWith("[checkpie]") || n.startsWith("[sortpie]")) {
+                            var r = [],
+                                i = [],
+                                s = n.startsWith("[sortpie]"),
+                                d = "cb",
+                                c = "[checkpie]";
+                            s && (d = "ab", c = "[sortpie]"), t.find(".answer").each((function() {
+                                var a = $(this),
+                                    t = a.attr("value");
+                                "Z" != t ? (r.push(a.html()), i.push(t), a.remove()) : a.attr("value", "0")
+                            }));
+                            var o = `<div class="${d}_group">`;
+                            r.forEach((function(a, t) {
+                                o += `<div data-value="${i[t]}" class="${d}_item">${a}</div>`
+                            })), o += "</div>", e.after(o);
+                            var l = e.html().split(c).join("");
+                            e.html(l), s && a(t.find(".answer"), !1)
+                        }
+                    }))
+                }))
+            </script>
+            <script>
+                var oldResultParse = window.resultParse,
+                    is_phantom = /phantomjs/i.test(navigator.userAgent);
+
+                function sendResults(e) {
+                    if (!window.halt_ajax && !is_phantom && e) {
+                        var t = {},
+                            s = !1,
+                            r = !1;
+                        $.each(e, (function(e, o) {
+                            t[o] = window[o], s = s || window[o].toString().length > 77, r = r || window[o].toString().length < 4
+                        })), window.key_array && (s = !1);
+                        var o = 1;
+                        s && (o = 0), r && (o = 2);
+                        var i = {
+                            answers: JSON.stringify(t),
+                            title: prestige,
+                            desc: $("meta[name=description]").attr("content"),
+                            key: prestige_key,
+                            image: prestige_img,
+                            isTake: 1,
+                            res: o,
+                            screenShotConfig: JSON.stringify(window.screenShotConfig)
+                        };
+                        s ? $(window).bind("scroll.rs, mousemove.rs", (function() {
+                            $(window).off("scroll.rs, mousemove.rs"), a()
+                        })) : a();
+                        var n = !1
+                    }
+
+                    function a() {
+                        n || (n = !0, $.post("", i, (function(e) {
+                            var t = og_link + e.share_id,
+                                s = t + "/screenshot";
+                            "" != prestige_img && (s = prestige_img), window.og_result_url = t, window.og_result_img = location.protocol + "//" + s.split("//")[1], $("a.fastsharefb").attr("href", "https://www.facebook.com/sharer/sharer.php?u=" + t);
+                            var r = $("a.fastsharetw").attr("href");
+                            $("a.fastsharetw").attr("href", r + "&url=" + t);
+                            try {
+                                prestige_loaded()
+                            } catch (e) {}
+                        }), "json"))
+                    }
+                }
+                window.resultParse = function() {
+                    oldResultParse(), window.is_save_page || window.delay_ajax || setTimeout((function() {
+                        sendResults(["iq_value"])
+                    }), 999)
+                }
+            </script>
+</body>
+
+</html>

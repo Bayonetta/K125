@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>JS5</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <form>
+        <p>
+            <label for="countdown">Countdown Input Area</label>
+            <input type="number" name="countdown" id="countdown">
+            <button type="button" id="execute-countdown">Start</button>
+        </p>
+    </form>
+    <div class="result-area">
+        <div>Countdown</div>
+        <p id="countdown-result"></p>
+    </div>
+    <p>
+        <label for="start">Start Num</label>
+        <input type="number" name="start" id="start">
+        <label for="end">Final Number</label>
+        <input type="number" name="end" id="end">
+        <button type="button" id="execute-odds">start</button>
+        <p>
+            <div class="result-area">
+                <label for="odds-sum">sum of odds</label>
+                <p id="odds-sum"></p>
+                <label for="evens-sum">average of odds</label>
+                <p id="odds-avg"></p>
+            </div>
+            <div class="result-area">
+                <div id="multiply-list">
+                </div>
+            </div>
+        </p>
+        <script defer src="src/js5.js" type="text/javascript"></script>
+</body>
+
+</html>

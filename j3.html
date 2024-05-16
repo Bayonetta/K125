@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Reservation System</title>
+    <meta charset="UTF-8">
+    <style>
+        #info {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to my restaurant</h1>
+    <form>
+        <label for="name">名前:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="number">人数:</label><br>
+        <select id="number" name="number">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br/>
+        <label for="email">メールアドレス:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <p>
+            <label for="datetime">日付と時間:</label><br>
+            <input type="radio" name="date" value="5/10 12：00">5/10 12：00</intput>
+            <input type="radio" name="date" value="5/10 18：00">5/10 18：00</intput>
+            <input type="radio" name="date" value="5/11 12：00">5/11 12：00</intput>
+            <input type="radio" name="date" value="5/11 18：00">5/11 18：00</intput>
+            <input type="radio" name="date" value="5/12 12：00">5/12 12：00</intput>
+            <input type="radio" name="date" value="5/12 18：00">5/12 18：00</intput>
+        </p>
+        <label for="notes">備考:</label><br>
+        <textarea id="notes" name="notes"></textarea><br>
+        <button type="button" id="submit">予約</button>
+        <div id="info">
+            <p><span id="name1"></span>さん</p>
+            <p>下記内容にて予約を完了しました。</p>
+            <p>ーーーーーーーーーーーーーー </p>
+            <p>氏名: <span id="name2"></span>様</p>
+            <p>人数: <span id="number2"></span>名</p>
+            <p>予約日：<span id="date2"></span></p>
+            <p>ーーーーーーーーーーーーーー</p>
+        </div>
+    </form>
+    <script src="src/js3.js"></script>
+</body>
+
+</html>
