@@ -20,7 +20,7 @@
             font-size: 18px;
             display: flex;
             justify-content: center;
-            z-index: 1000;
+            z-index: 1;
             padding: 0 20px;
         }
         
@@ -119,6 +119,121 @@
         #submit:hover {
             background-color: rgba(73, 74, 95, 0.5);
         }
+        
+        #restart {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            padding: 0;
+            display: block;
+            margin: 20px auto 0;
+        }
+        
+        #restart img {
+            display: block;
+            width: 40px;
+            height: auto;
+        }
+        
+        .popup {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            bottom: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2;
+            visibility: hidden;
+            opacity: 0;
+            overflow: hiden;
+            transition: 0.64s ease-in-out;
+        }
+        
+        .popup-inner {
+            position: relative;
+            bottom: -100vw;
+            right: -100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            max-height: 600px;
+            width: 60%;
+            height: 80%;
+            background-color: #fff;
+            transform: rotate(32deg);
+            transition: 0.64s ease-in-out;
+        }
+        
+        .popup__photo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+        
+        .popup__photo img {
+            width: 60%;
+            height: auto;
+        }
+        
+        .popup__text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 80%;
+            height: 100%;
+            padding: 4rem;
+        }
+        
+        .popup__text h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            color: #0A0A0A;
+        }
+        
+        .popup__text p {
+            font-size: 0.875rem;
+            color: #686868;
+            line-height: 1.5;
+        }
+        
+        .popup:target {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .popup:target .popup-inner {
+            bottom: 0;
+            right: 0;
+            transform: rotate(0);
+        }
+        
+        .popup__close {
+            position: absolute;
+            right: -1rem;
+            top: -1rem;
+            width: 3rem;
+            height: 3rem;
+            font-size: 0.875rem;
+            font-weight: 300;
+            border-radius: 100%;
+            background-color: #0A0A0A;
+            z-index: 4;
+            color: #fff;
+            line-height: 3rem;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -150,6 +265,27 @@
             </ul>
         </div>
         <button id="submit">Next</button>
+
+        <button id="restart" style="display: none;">
+            <img src="src/restart.png" alt="Restart">
+        </button>
+    </div>
+    <div class="popup" id="popup">
+        <div class="popup-inner">
+            <div class="popup__photo" id="popup_img">
+                <img src="https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-good.jpg" alt=" ">
+            </div>
+            <div class="popup__text">
+                <h1 id="popup_title">Lawful Good</h1>
+                <p id="popup_text1">A character with a lawful good alignment will try to do what is right based on what society expects from them. They’ll follow the rules, and work within the system to achieve benevolent goals, assisting those in need and fighting evil
+                    wherever it lurks.</p>
+                <br>
+                <p id="popup_text2">Lawful Good characters tend to be the most well-liked by NPCs, who can be sure that a lawful good party will not only rid them of nearby monsters, but obey local laws while doing so. Paladins and many DnD Clerics make good lawful good
+                    characters, though some players may find this D&D alignment a bit too inflexible.
+                </p>
+            </div>
+            <a class="popup__close" href="#">X</a>
+        </div>
     </div>
     <script>
         var questions = [{
@@ -165,18 +301,56 @@
                 'I lie if it benifits me as well'
             ]
         }, {
-            question: "3. what is your opinion on immigraion and border control?",
+            question: "3. what is your opinion on immigraion and border control? ",
             options: ['Implement fair and strict immigration laws to maintain national order.',
                 'Welcome immigrants and provide support for their integration into society.',
                 'Disregard immigration laws and promote open borders.'
             ]
         }, {
-            question: "4. How should a nation address income inequality?",
+            question: "4. How should a nation address income inequality? ",
             options: ['Implement social safety nets and progressive taxation to reduce disparities.',
                 'Maintain a merit-based system and enforce existing economic regulations.',
                 'Let the free market decide.'
             ]
         }];
+
+        var popupTitles = ['Lawful Good', 'Neutral Good', 'Chaotic Good', 'Lawful Neutral', 'True Neutral', 'Chaotic Neutral', 'Lawful Evil', 'Neutral Evil', 'Chaotic Evil'];
+
+        var popupText1s = [
+            'A character with a lawful good alignment will try to do what is right based on what society expects from them. They’ll follow the rules, and work within the system to achieve benevolent goals, assisting those in need and fighting evil wherever it lurks.',
+            'Characters with a neutral good alignment are not particularly attached to order or chaos, but they do love being nice. They’ll often follow the rules simply because this causes the least friction, but will not be especially hesitant to break those rules if they think a better outcome will be achieved by doing so.',
+            'Chaotic good characters try to do what is right, but on their own terms, not those set by society. As a result, they may end up breaking rules in an effort to do right. They’ll have benevolent intentions but will follow their own consciences first and foremost. Chaotic good and lawful good characters will often disagree on the best solution to a problem.',
+            'Lawful neutral characters stick to the rules – whether that’s the laws set by a ruler, those issued by a governing body, or the traditions of their society – and aren’t so fussed whether the laws they’re following are just or not.',
+            'The fence-sitters of all DnD settings, true neutral characters aren’t particularly dedicated to stamping out evil, but nor are they especially diabolical themselves. They won’t seek to break the rules but won’t put undue effort into upholding them either.',
+            'This D&D alignment has a bit of a bad reputation. It’s sometimes associated with the kind of ‘murder hobo’ player who’ll save a village from a marauding army, then steal all its gold, set the inn on fire, shout ‘chaotic neutral, baby!’, and ride off into the sunset. That is a way you can play the Chaotic Neutral alignment, but be warned that in most games, this won’t get you an invitation to session two.',
+            'A character who does whatever they want within the bounds of a certain code or set of laws, not caring about the impact it has on others, is lawful evil. Some lawful evil characters may believe they’re actually good, simply because they’re following the rules. They may uphold the law, but apply it methodically and mercilessly, without nuance, or using loopholes for selfish and destructive reasons.',
+            'A character that has a neutral evil alignment is not tied to any kind of code like a lawful evil character, but is also not wantonly destructive or bloodthirsty like a chaotic evil one. They’re simply committed to evil.',
+            'The alignment most in line with the cackling maniacal supervillain, chaotic evil is a difficult alignment for a PC to take. That’s because chaotic evil characters don’t play well with others, even those who share this alignment.'
+        ];
+
+        var popupText2s = [
+            'Lawful Good characters tend to be the most well-liked by NPCs, who can be sure that a lawful good party will not only rid them of nearby monsters, but obey local laws while doing so. Paladins and many DnD Clerics make good lawful good characters, though some players may find this D&D alignment a bit too inflexible.',
+            'Not overtly rebellious or rule-abiding, a neutral good character simply cares about whatever does the most good.',
+            'Chaotic good characters make excellent freedom fighters or rebels. They’ll usually be the first to speak out against corruption within the system and won’t respect a tradition which they see as morally wrong. DnD Druids or DnD Rangers are often a good fit for the Chaotic Good alignment, since these D&D classes spend much of their time apart from society and its expectations.',
+            'Those with this alignment seldom think much about morality. Instead they value order and authority above all else. Chaotic good characters hate them. According to the D&D 5e basic rules, many DnD Wizards and DnD Monks are Lawful Neutral.',
+            'Most of them are just middle-of-the-road folk, getting on with their lives without worrying about sticking to any kind of strong code. Deep down, we’re probably all a little bit ‘true neutral’. However, there are some characters with this alignment that take their neutrality to a (relative) extreme, determined to uphold a balance between law and chaos, good and evil.',
+            'Chaotic neutral characters typically aren’t such terrifying agents of chaos and randomness, but they are quite unpredictable. It’s fairer to say they are at the mercy of their own whims, always doing what’s best for themselves at any given moment. They value immense personal freedom, but won’t put that at risk to protect the freedoms of others.',
+            'Other lawful evil characters may know full well that they’re rotten, and seek to dominate and rule in an authoritarian, but lawful, manner. These are likely to be the most dangerous villains of all, combining evil intent with the discipline and organisation to achieve their aims.',
+            'Above all else, a neutral evil alignment means selfishness, doing whatever wrongs one can get away with no hesitation and no compassion.',
+            'Often angry and prone to random acts of violence, chaotic evil characters march to the jerky beat of their own wicked drum. Cruel and perhaps sadistic, they probably perform evil acts simply for the sake of it, and for their own enjoyment.'
+        ];
+
+        var imgSrcs = [
+            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-good.jpg',
+            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-chaotic-neutral.jpg',
+            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-5e-paladin.jpg',
+            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-5e-campfire.jpg',
+            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-5e-force-field.jpg',
+            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-neutral.jpg',
+            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-lawful-evil.jpg',
+            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-neutral-evil.jpg',
+            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-5e-tiefling.jpg'
+        ];
 
         var currentQuestionIndex = 0;
 
@@ -184,7 +358,13 @@
         var option1 = document.getElementById('option1');
         var option2 = document.getElementById('option2');
         var option3 = document.getElementById('option3');
-        var submitButton = document.getElementById('submit');;
+        var submitButton = document.getElementById('submit');
+        var popupImg = document.getElementById('popup_img');
+        var imgElement = popupImg.getElementsByTagName('img')[0];
+        var restartButton = document.getElementById('restart');
+
+        var score1 = 0; //judge the score of good and evil alignment
+        var score2 = 0; //judge the score of law and chaos alignment
 
         function selectOption(optionElement) {
             var options = document.getElementsByClassName('option');
@@ -201,19 +381,68 @@
             }
         }
 
+        function updateScore() {
+            var options = document.getElementsByClassName('option');
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].classList.contains('selected') == true) {
+                    if (currentQuestionIndex <= 1) {
+                        score1 += i;
+                    } else {
+                        score2 += i;
+                    }
+                }
+            }
+        }
+
+        function checkResult() {
+            var popupTitle = document.getElementById('popup_title');
+            var popupText1 = document.getElementById('popup_text1');
+            var popupText2 = document.getElementById('popup_text2');
+
+            var indexOfAlignment = 0;
+            if (score1 == 0) {
+                if (score2 == 0) {
+                    indexOfAlignment = 0;
+                } else if (score2 == 4) {
+                    indexOfAlignment = 1;
+                } else {
+                    indexOfAlignment = 2;
+                }
+            } else if (score1 == 4) {
+                if (score2 == 0) {
+                    indexOfAlignment = 6;
+                } else if (score2 == 4) {
+                    indexOfAlignment = 8;
+                } else {
+                    indexOfAlignment = 7;
+                }
+            } else {
+                if (score2 == 0) {
+                    indexOfAlignment = 3;
+                } else if (score2 == 4) {
+                    indexOfAlignment = 5;
+                } else {
+                    indexOfAlignment = 4;
+                }
+            }
+
+            popupTitle.textContent = popupTitles[indexOfAlignment];
+            popupText1.textContent = popupText1s[indexOfAlignment];
+            popupText2.textContent = popupText2s[indexOfAlignment];
+
+            imgElement.src = imgSrcs[indexOfAlignment];
+        }
+
         option1.addEventListener('click', function() {
             selectOption(this);
-            selectedOptions.push(this.innerText); // Record the option
         });
 
         option2.addEventListener('click', function() {
             selectOption(this);
-            selectedOptions.push(this.innerText); // Record the option
         });
 
         option3.addEventListener('click', function() {
             selectOption(this);
-            selectedOptions.push(this.innerText); // Record the option
         });
 
         function updateQuestion() {
@@ -227,7 +456,7 @@
             ++currentQuestionIndex;
 
             if (currentQuestionIndex == questions.length - 1) {
-                submitButton.textContent = 'Submit';
+                submitButton.textContent = 'Check Result';
             } else {
                 submitButton.textContent = 'Next';
             }
@@ -239,15 +468,31 @@
         }
 
         submitButton.addEventListener('click', function() {
+            updateScore();
             if (currentQuestionIndex == questions.length - 1) {
-                // Display the result
-                var result = selectedOptions.join(' ');
-                alert('Your D&D alignment is: ' + result);
-                return;
+                checkResult();
+                window.location.href = '#popup';
+                restartButton.style.display = "block"; // 显示重新开始按钮
+
             } else {
                 updateQuestion();
                 resetOptions();
             }
+        });
+
+        restartButton.addEventListener('click', function() {
+            currentQuestionIndex = 0;
+            score1 = 0;
+            score2 = 0;
+
+            resetOptions();
+            questionText.textContent = questions[currentQuestionIndex].question;
+            option1.textContent = questions[currentQuestionIndex].options[0];
+            option2.textContent = questions[currentQuestionIndex].options[1];
+            option3.textContent = questions[currentQuestionIndex].options[2];
+
+            restartButton.style.display = "none";
+            submitButton.textContent = 'Next';
         });
     </script>
 </body>
