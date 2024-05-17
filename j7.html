@@ -19,19 +19,19 @@
         <input type="text" id="name" name="name"><br>
         <label for="number">人数:</label><br>
         <select id="number" name="number">
-            <option value="1">1</option>
+            <option value="1" selected>1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
-            <option value="5" selected>5</option>
+            <option value="5">5</option>
         </select>
         <br/>
         <div id="name-inputs">
-            <input type="text" id="name1" name="name1" placeholder="名前">
-            <input type="text" id="name2" name="name2" placeholder="名前">
-            <input type="text" id="name3" name="name3" placeholder="名前">
-            <input type="text" id="name4" name="name4" placeholder="名前">
-            <input type="text" id="name5" name="name5" placeholder="名前">
+            <input type="text" id="name-input1" name="names" placeholder="名前">
+            <input type="text" id="name-input2" name="names" placeholder="名前">
+            <input type="text" id="name-input3" name="names" placeholder="名前">
+            <input type="text" id="name-input4" name="names" placeholder="名前">
+            <input type="text" id="name-input5" name="names" placeholder="名前">
         </div>
 
         <label for="email">メールアドレス:</label><br>
@@ -52,7 +52,7 @@
             <p><span id="name1"></span>さん</p>
             <p>下記内容にて予約を完了しました。</p>
             <p>ーーーーーーーーーーーーーー </p>
-            <p>氏名: <span id="name2"></span>様</p>
+            <p>氏名: <span id="name2"></span>様 <span id="whole-names"></span></p>
             <p>人数: <span id="number2"></span>名</p>
             <p>予約日：<span id="date2"></span></p>
             <p>ーーーーーーーーーーーーーー</p>
