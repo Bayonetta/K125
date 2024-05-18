@@ -405,9 +405,9 @@
                 if (score2 == 0) {
                     indexOfAlignment = 0;
                 } else if (score2 == 4) {
-                    indexOfAlignment = 1;
-                } else {
                     indexOfAlignment = 2;
+                } else {
+                    indexOfAlignment = 1;
                 }
             } else if (score1 == 4) {
                 if (score2 == 0) {
@@ -470,9 +470,9 @@
         submitButton.addEventListener('click', function() {
             updateScore();
             if (currentQuestionIndex == questions.length - 1) {
-                checkResult();
+                window.setInterval(checkResult, 100);
                 window.location.href = '#popup';
-                restartButton.style.display = "block"; // 显示重新开始按钮
+                restartButton.style.display = "block";
             } else {
                 updateQuestion();
                 resetOptions();
