@@ -274,7 +274,7 @@
     <div class="popup" id="popup">
         <div class="popup-inner">
             <div class="popup__photo" id="popup_img">
-                <img src="https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-good.jpg" alt=" ">
+                <img src="" alt=" ">
             </div>
             <div class="popup__text">
                 <h1 id="popup_title">Lawful Good</h1>
@@ -342,15 +342,15 @@
         ];
 
         var imgSrcs = [
-            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-good.jpg',
-            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-chaotic-neutral.jpg',
-            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-5e-paladin.jpg',
-            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-5e-campfire.jpg',
-            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-5e-force-field.jpg',
-            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-neutral.jpg',
-            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-lawful-evil.jpg',
-            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-neutral-evil.jpg',
-            'https://www.wargamer.com/wp-content/sites/wargamer/2022/04/dnd-alignments-5e-tiefling.jpg'
+            'src/lawful-good.jpg',
+            'src/neutral-good.jpg',
+            'src/chaotic-good.jpg',
+            'src/lawful-neutral.jpg',
+            'src/true-neutral.jpg',
+            'src/chaotic-neutral.jpg',
+            'src/lawful-evil.jpg',
+            'src/neutral-evil.jpg',
+            'src/chaotic-evil.jpg'
         ];
 
         var currentQuestionIndex = 0;
@@ -364,8 +364,8 @@
         var imgElement = popupImg.getElementsByTagName('img')[0];
         var restartButton = document.getElementById('restart');
 
-        var score1 = 0; //judge the score of good and evil alignment
-        var score2 = 0; //judge the score of law and chaos alignment
+        var score1 = 0; //judge the score of good or evil alignment
+        var score2 = 0; //judge the score of law or chaos alignment
 
         function selectOption(optionElement) {
             var options = document.getElementsByClassName('option');
@@ -427,11 +427,10 @@
                 }
             }
 
+            imgElement.src = imgSrcs[indexOfAlignment];
             popupTitle.textContent = popupTitles[indexOfAlignment];
             popupText1.textContent = popupText1s[indexOfAlignment];
             popupText2.textContent = popupText2s[indexOfAlignment];
-
-            imgElement.src = imgSrcs[indexOfAlignment];
         }
 
         option1.addEventListener('click', function() {
@@ -474,7 +473,6 @@
                 checkResult();
                 window.location.href = '#popup';
                 restartButton.style.display = "block"; // 显示重新开始按钮
-
             } else {
                 updateQuestion();
                 resetOptions();
