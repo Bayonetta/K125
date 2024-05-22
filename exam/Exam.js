@@ -59,7 +59,6 @@ function show_q2() {
 // question3
 
 function check() {
-
     if (input3.value == "") {
         alert("Please enter a number");
         input3.value = '';
@@ -88,4 +87,48 @@ function check() {
     }
     result3.textContent = "true";
     return;
+}
+
+
+// question4
+
+var reservations = [];
+
+function send() {
+    let name = document.getElementById('name').value;
+    let number = document.getElementById('number').value;
+    let email = document.getElementById('email').value;
+    let date = document.querySelector("input[name='date']:checked").value;
+    let notes = document.getElementById('notes').value;
+
+    var reservation = {
+        name: name,
+        number: number,
+        email: email,
+        date: date,
+        notes: notes
+    };
+    reservations.push(reservation);
+}
+
+function check_list() {
+    var result4 = document.getElementById('result_q4');
+
+    var table = '<table>';
+    for (var i = 0; i < reservations.length; i++) {
+        table += '<tr>';
+        for (var key in reservations[i]) {
+            table += '<td>' + reservations[i][key] + '</td>';
+        }
+        table += '<td><button onclick="delete_reservation(' + i + ')">删除</button></td>';
+        table += '</tr>';
+    }
+    table += '</table>';
+
+    result4.innerHTML = table;
+}
+
+function delete_reservation(index) {
+    reservations.splice(index, 1);
+    check_list();
 }
