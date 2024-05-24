@@ -120,7 +120,7 @@ function check_list() {
         for (var key in reservations[i]) {
             table += '<td>' + reservations[i][key] + '</td>';
         }
-        table += '<td><button onclick="delete_reservation(' + i + ')">删除</button></td>';
+        table += '<td><button onclick="delete_reservation(' + i + ')">削除</button></td>';
         table += '</tr>';
     }
     table += '</table>';
